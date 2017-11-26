@@ -1,0 +1,154 @@
+body{
+	position: relative;
+	display: inline-block;
+	width: 100%;
+	min-height: 100%;
+	margin: 0;
+	padding: 0;
+	color: rgba(90,90,90,1.00);
+	text-align: center;
+	font-size: medium;
+}
+
+#content{
+	display: inline-block;
+	width: 60%;
+	height: 700px;
+	background-color: white;
+	margin-top: 0px;
+	overflow: hidden; 
+	box-shadow: 0px 1px 8px rgba(200,200,200,1.5);
+}
+
+#telegram{
+	float: left;
+	display: inline-block;
+	width: 20%;
+	height: 30px;
+	line-height: 30px;
+	border-bottom: : 1px solid rgba(255,0,0,.3);
+	background-color: #5682a3;
+	text-align: left;
+	padding-left: 10%;
+	color: white;
+	font-family:monospace;
+	font-weight:bold;
+}
+
+#room{
+	display: inline-block;
+	width: 70%;
+	height: 30px;
+	line-height: 30px;
+	border-bottom: 1px solid rgba(255,0,0,.3);
+	background-color: #5682a3;
+	text-align: left;
+	color: white;
+	font-family:monospace;
+	font-weight:bold;
+}
+
+#roomSum{
+	position: relative;	
+	float: left;
+	display: inline-block;
+	width: 29.5%;
+	height: 500px;
+	line-height: 50px;
+	text-align: left;
+	font-family:monospace;
+	font-weight:bold;
+	border-right: 2px solid;
+	border-bottom: 2px solid;
+	border-top: 2px solid;
+	text-align: center;
+	overflow: hidden;
+}
+
+#messages{
+	position: relative;
+	display: inline-block;
+	width: 62%;
+	height: 465px;
+	line-height: 50px;
+	text-align: left;
+	font-family:monospace;
+	font-weight:bold;
+	padding-left: 8%;
+	overflow: auto;
+	border-top: 2px solid;
+}
+
+#send-form{
+	width: 100%;
+	border-bottom: 2px solid;
+	padding-bottom: 5px;
+}
+
+#send-button{
+	color: rgb(17, 138, 214);
+	font-weight:bold;
+	width:10%;
+}
+
+#send-message{
+	width:43%;
+	line-height: 20px;
+}
+
+#messages div{
+	line-height: 20px;
+}
+
+#room-list div:hover{
+	background-color: rgb(206, 220, 229);
+}
+
+#room-list {
+	height:460px;
+	overflow: scroll;
+}
+
+#add-room-button{
+	color: rgb(17, 138, 214);
+	font-weight:bold;
+}
+
+#add-room{
+	border:1px solid rgb(17, 138, 214);;
+}
+
+.pop{
+	height: 0%;
+    width: 60%;
+    margin-left: 20%;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0, 0.9);
+    overflow-y: hidden;
+    overflow: hidden;
+    transition: 0.5s;
+}
+
+.overlay-content {
+    position: relative;
+    top: 0%;
+    width: 100%;
+	padding-left: 0%;
+    border-radius: 8px;
+    text-align: center;
+    margin-top: 0px;
+}
+
+.overlay-content a {
+    padding: 1px;
+    text-decoration: none;
+    font-size: 12px;
+    color: #ffffff;
+    display: block;
+    transition: 0.3s;
+    font-family: Microsoft JhengHei;
+}
