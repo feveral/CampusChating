@@ -19,8 +19,7 @@ $(document).ready(function(){
     	$("#room-list div").css("color", "black");
     	$(e.target).css("background-color","#5682a3 ");
     	$(e.target).css("color","white");
-        var txt = $(e.target).text();
-  		$('#room').text(txt);
+  		$('#room').text($(e.target).text());
   		$('#messages').empty();
     });
 });
