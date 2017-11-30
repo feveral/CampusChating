@@ -11,6 +11,4 @@ new RSAServer(rsaRouter);
 app.use('/rsa', rsaRouter);
 app.use(express.static('public'));
 
-
-
 chatServer.listen(app.listen(80));

@@ -1,9 +1,12 @@
 var socketio = require('socket.io');
+var aesEncrypt = require('./aes_encrypt.js');
 var io;
 var guestNumber = 1;
 var nickNames = {};
 var namesUsed = [];
 var currentRoom = {};
+var keyList = [];
+
 
 exports.listen = function(server) {
     io = socketio.listen(server);
@@ -37,7 +40,7 @@ function joinRoom(socket, room) {
     currentRoom[socket.id] = room;
     socket.emit('joinResult', {room: room});
     socket.broadcast.to(room).emit('BroadCastmessage', {
-        text: encrytMessage(0, nickNames[socket.id] + ' has joined ' + room + '.')
+        text: aesEncrypt.encrytMessage(0, nickNames[socket.id] + ' has joined ' + room + '.')
     });
 
     var usersInRoom = io.sockets.clients(room);
@@ -55,7 +58,7 @@ function joinRoom(socket, room) {
         }
     }
     usersInRoomSummary += '.';
-    socket.emit('BroadCastmessage', {text:encrytMessage(0,usersInRoomSummary)});
+    socket.emit('BroadCastmessage', {text:aesEncrypt.encrytMessage(0,usersInRoomSummary)});
   }
 }
 
@@ -64,7 +67,7 @@ function handleNameChangeAttempts(socket, nickNames, namesUsed) {
         if (name.indexOf('Guest') == 0) {
             socket.emit('nameResult', {
             success: false,
-            message: encrytMessage(0, 'Names cannot begin with "Guest".')
+            message: aesEncrypt.encrytMessage(0, 'Names cannot begin with "Guest".')
             });
         } 
         else 
@@ -81,14 +84,14 @@ function handleNameChangeAttempts(socket, nickNames, namesUsed) {
                     name: name
                 });
                 socket.broadcast.to(currentRoom[socket.id]).emit('BroadCastmessage', {
-                    text:encrytMessage(0, previousName + ' is now known as ' + name + '.')
+                    text:aesEncrypt.encrytMessage(0, previousName + ' is now known as ' + name + '.')
                 });
             } 
             else 
             {
                 socket.emit('nameResult', {
                 success: false,
-                message: encrytMessage(0, 'That name is already in use.')
+                message: aesEncrypt.encrytMessage(0, 'That name is already in use.')
                 });
             }
         }
@@ -98,7 +101,7 @@ function handleNameChangeAttempts(socket, nickNames, namesUsed) {
 function handleMessageBroadcasting(socket) {
     socket.on('BroadCastmessage', function (message) {
     	console.log("encrypt message:"+message.text);
-    	message.text = decryptMessage(0, message.text);
+    	message.text = aesEncrypt.decryptMessage(0, message.text);
 
         if(message.room != "Lobby" )
         {
@@ -111,13 +114,13 @@ function handleMessageBroadcasting(socket) {
             io.sockets.sockets[userId].emit('message',{
             	room:nickNames[socket.id],
             	toUser:userId,
-            	text:encrytMessage(0, nickNames[socket.id]+':'+ message.text)
+            	text:aesEncrypt.encrytMessage(0, nickNames[socket.id]+':'+ message.text)
             });
         }
         else
         {
             socket.broadcast.to(message.room).emit('BroadCastmessage', {
-            text:encrytMessage(0,nickNames[socket.id] + ': ' + message.text)
+            text:aesEncrypt.encrytMessage(0,nickNames[socket.id] + ': ' + message.text)
             });
         }
     });
@@ -138,37 +141,14 @@ function handleClientDisconnection(socket) {
     });
 }
 
+function handleClientKey(socket) {
+    socket.on('key', function(key) {
+    	keyList[0] = key;
+    });
+}
+
 function getKeyByValue(object, value) {
     return Object.keys(object).find(key => object[key] === value);
 }
 
-var aesjs = require('aes-js');
-function decryptMessage(key, message){
-	key = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
-	// 將十六進位的資料轉回二進位
-	var encryptedBytes = aesjs.utils.hex.toBytes(message);
 
-	// 解密時要建立另一個 Counter 實體
-	var aesCtr = new aesjs.ModeOfOperation.ctr(key, new aesjs.Counter(5));
-	var decryptedBytes = aesCtr.decrypt(encryptedBytes);
-
-	// 將二進位資料轉換回文字
-	var decryptedText = aesjs.utils.utf8.fromBytes(decryptedBytes);
-	console.log(decryptedText);
-	return decryptedText;
-}
-
-function encrytMessage(key, message){
-	key = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
-	// 將文字轉換為位元組
-	var textBytes = aesjs.utils.utf8.toBytes(message);
-
-	// Counter 可省略，若省略則從 1 開始
-	var aesCtr = new aesjs.ModeOfOperation.ctr(key, new aesjs.Counter(5));
-	var encryptedBytes = aesCtr.encrypt(textBytes);
-
-	// 加密過後的資料是二進位資料，若要輸出可轉為十六進位格式
-	var encryptedHex = aesjs.utils.hex.fromBytes(encryptedBytes);
-	console.log(encryptedHex);
-	return encryptedHex;
-}
