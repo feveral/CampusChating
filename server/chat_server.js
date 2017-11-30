@@ -1,5 +1,5 @@
 var socketio = require('socket.io');
-var aesEncrypt = require('./aes_encrypt.js');
+var aesEncrypt = require('./AESManager.js');
 var io;
 var guestNumber = 1;
 var nickNames = {};

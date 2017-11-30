@@ -8,15 +8,7 @@ Chat.prototype.sendMessage = function(room, text) {
         text: encrypt(text)
     };
     this.socket.emit('BroadCastmessage', message);
-    key = getKey();
-    sendKey(key);
 };
-
-Chat.prototype.sendKey = function(key){
-	this.socket.emit('key', {
-        key: key
-    });
-}
 
 Chat.prototype.changeRoom = function(room) {
     this.socket.emit('join', {
