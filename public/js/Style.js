@@ -1,17 +1,3 @@
-// function styler(){
-// 		console.log("blue");
-
-// 	$(document).ready(function(this) {
-// 		$(this).css('background-color', 'red');
-// 		console.log("blue");
-// 		// $("#room-list").css("background-color", "white");
-// 	 //    $("#room-list div").css("background-color", "rgb(86, 176, 234)");
-// 	    $('#messages').empty();
-//     	console.log(x);
-// 		$('#room').text($(this));
-//     });
-// }
-
 $(document).ready(function(){
     $('#room-list').click(function(e){
     	$("#room-list div").css("background-color", "white");

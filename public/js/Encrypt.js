@@ -39,24 +39,3 @@ function decryptMessage(text){
 	console.log(decryptedText);
 	return decryptedText;
 }
-
-function getKey(){
-	// The passphrase used to repeatably generate this RSA key.
-	var PassPhrase = "The Moon is a Harsh Mistress."; 
-
-	// The length of the RSA key, in bits.
-	var Bits = 1024; 
-
-	var MattsRSAkey = cryptico.generateRSAKey(PassPhrase, Bits);
-	//console.log(MattsRSAkey);
-	var MattsPublicKeyString = cryptico.publicKeyString(MattsRSAkey);  
-	console.log(MattsPublicKeyString);
-
-	var PlainText = "Matt";
-	var EncryptionResult = cryptico.encrypt(PlainText, MattsPublicKeyString);
-	console.log(EncryptionResult.cipher);
-	console.log(MattsRSAkey);
-	var DecryptionResult = cryptico.decrypt(EncryptionResult.cipher, MattsRSAkey);
-	console.log(DecryptionResult.plaintext);
-	return(MattsRSAkey);
-}

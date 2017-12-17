@@ -18,7 +18,7 @@ module.exports = class{
 
 	Encrypt(message){
 		var textBytes = aesjs.utils.utf8.toBytes(message);
-		var aesCtr = new aesjs.ModeOfOperation.ctr(key, new aesjs.Counter(5));
+		var aesCtr = new aesjs.ModeOfOperation.ctr(this.key, new aesjs.Counter(5));
 		var encryptedBytes = aesCtr.encrypt(textBytes);
 		var encryptedHex = aesjs.utils.hex.fromBytes(encryptedBytes);
 		return encryptedHex;
