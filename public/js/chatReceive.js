@@ -14,7 +14,7 @@ $(document).ready(function() {
 	    } 
 	    else 
 	    {
-	    	message = decryptMessage(result.message);
+	    	message = result.message;
 	    }
 	    $('#messages').append(divSystemContentElement(message));
 	});
@@ -25,14 +25,14 @@ $(document).ready(function() {
 	});
 
 	socket.on('BroadCastmessage', function (message) {
-		message.text = decryptMessage(message.text);
+		message.text = message.text;
     	var newElement = $('<div></div>').text(message.text);
     	$('#messages').append(newElement);
     	showWindows(message.text);
     });
 
 	socket.on('message', function (message) {
-		message.text = decryptMessage(message.text);
+		message.text = message.text;
     	addRoom(message.room);
     	var newElement = $('<div></div>').text(message.text);
     	$('#messages').append(newElement);  

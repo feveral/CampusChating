@@ -40,7 +40,7 @@ function joinRoom(socket, room) {
     currentRoom[socket.id] = room;
     socket.emit('joinResult', {room: room});
     socket.broadcast.to(room).emit('BroadCastmessage', {
-        text: aesEncrypt.encrytMessage(0, nickNames[socket.id] + ' has joined ' + room + '.')
+        text:  nickNames[socket.id] + ' has joined ' + room + '.'
     });
 
     var usersInRoom = io.sockets.clients(room);
@@ -58,7 +58,7 @@ function joinRoom(socket, room) {
         }
     }
     usersInRoomSummary += '.';
-    socket.emit('BroadCastmessage', {text:aesEncrypt.encrytMessage(0,usersInRoomSummary)});
+    socket.emit('BroadCastmessage', {text:usersInRoomSummary});
   }
 }
 
@@ -67,7 +67,7 @@ function handleNameChangeAttempts(socket, nickNames, namesUsed) {
         if (name.indexOf('Guest') == 0) {
             socket.emit('nameResult', {
             success: false,
-            message: aesEncrypt.encrytMessage(0, 'Names cannot begin with "Guest".')
+            message: 'Names cannot begin with "Guest".'
             });
         } 
         else 
@@ -84,14 +84,14 @@ function handleNameChangeAttempts(socket, nickNames, namesUsed) {
                     name: name
                 });
                 socket.broadcast.to(currentRoom[socket.id]).emit('BroadCastmessage', {
-                    text:aesEncrypt.encrytMessage(0, previousName + ' is now known as ' + name + '.')
+                    text:previousName + ' is now known as ' + name + '.'
                 });
             } 
             else 
             {
                 socket.emit('nameResult', {
                 success: false,
-                message: aesEncrypt.encrytMessage(0, 'That name is already in use.')
+                message: 'That name is already in use.'
                 });
             }
         }
@@ -101,26 +101,21 @@ function handleNameChangeAttempts(socket, nickNames, namesUsed) {
 function handleMessageBroadcasting(socket) {
     socket.on('BroadCastmessage', function (message) {
     	console.log("encrypt message:"+message.text);
-    	message.text = aesEncrypt.decryptMessage(0, message.text);
+    	message.text = message.text;
 
         if(message.room != "Lobby" )
         {
-            console.log(message.room);
             var userId = getKeyByValue(nickNames,message.room); 
-            console.log(nickNames[socket.id]);
-            console.log(nickNames);
-            console.log(nickNames[userId]);
-            console.log("ssss"+nickNames[socket.id]+':'+message.text);
             io.sockets.sockets[userId].emit('message',{
             	room:nickNames[socket.id],
             	toUser:userId,
-            	text:aesEncrypt.encrytMessage(0, nickNames[socket.id]+':'+ message.text)
+            	text:nickNames[socket.id]+':'+ message.text
             });
         }
         else
         {
             socket.broadcast.to(message.room).emit('BroadCastmessage', {
-            text:aesEncrypt.encrytMessage(0,nickNames[socket.id] + ': ' + message.text)
+                text:nickNames[socket.id] + ': ' + message.text
             });
         }
     });
