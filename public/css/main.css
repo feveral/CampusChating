@@ -66,36 +66,42 @@ body{
 	overflow: hidden;
 }
 
-#messages{
+#messagesRoom{
 	position: relative;
 	display: inline-block;
 	width: 62%;
-	height: 72vh;
+	height: 80vh;
 	line-height: 50px;
 	text-align: left;
 	padding-left: 8%;
-	padding-top: 10px;
+	border-bottom: 2px solid #dee5ef;
 	overflow: auto;
 }
 
-#send-form{
-	width: 100%;
-	height: 7.5vh;
-	border-bottom: 2px solid #dee5ef;
-	padding-bottom: 0.5vh;
+#messages{
+	margin-top:4%;
 }
 
-#send-button{
+#send-form{
+	width: 88%;
+	height: 7.5vh;
+	padding-bottom: 0.5vh;
+	position: absolute;
+	bottom:0;
+}
+
+#send-form>input:nth-child(2){
 	color: rgb(17, 138, 214);
 	font-weight:bold;
-	width:10%;
+	width:12%;
 }
 
 #send-form input[type=text]{
-	width:43%;
+	width:50%;
 	height:3vh;
 	border: 2px solid white;
 	padding-top: 0px;
+	border-bottom: 1px solid blue;
 }
 
 #send-form input[type=text]:focus{

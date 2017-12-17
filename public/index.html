@@ -27,24 +27,28 @@
 <div id='content'>
     <div id='telegram'>Telegram</div>
     <div id='room'></div>
-    <div id='roomSum'>
-        <form id='add-room-form'>
-            <input id='add-room' />
-            <input id='add-room-button' type='submit' value='ADD'/>
-        </form>   
-        <div id="room-list"></div>
-    </div>
-    <div id='messages'></div>
-    <form id='send-form'>
-        <input id='send-message' type="text" placeholder="send-message" />
-        <input id='send-button' type='submit' value='SEND'/>
-    </form>
-    <div id='help'>
+    <div>
+	    <div id='roomSum'>
+	        <form id='add-room-form'>
+	            <input id='add-room' />
+	            <input id='add-room-button' type='submit' value='ADD'/>
+	        </form>   
+	        <div id="room-list"></div>
+	    </div>
+	    <div id='messagesRoom'>
+		    <div id = 'messages'></div>
+		    <form id='send-form'>
+		        <input id='send-message' type="text" placeholder="send-message" />
+		        <input id='send-button' type='submit' value='SEND'/>
+		    </form>
+		</div>
+	<div>
+    <!-- <div id='help'>
         <ul>
             <li>Change nickname: <code>/nick [username]</code></li>
             <li>Join/create room: <code>/join [room name]</code></li>
         </ul>
-    </div>
+    </div> -->
 </div>
 
 </body>
