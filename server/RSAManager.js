@@ -27,5 +27,4 @@ module.exports = class{
 	GetPrivateKey(){
   		return this.key.exportKey('private');
 	}
-
 }

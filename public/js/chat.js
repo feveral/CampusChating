@@ -5,7 +5,7 @@ var Chat = function(socket) {
 Chat.prototype.sendMessage = function(room, text) {
     var message = {
         room: room,
-        text: encrypt(text)
+        text: text
     };
     this.socket.emit('BroadCastmessage', message);
 };
