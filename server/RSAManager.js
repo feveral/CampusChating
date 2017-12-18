@@ -10,14 +10,15 @@ module.exports = class{
 
 	GenerateKey(){
 		this.key = new NodeRSA({b: 512});
+		this.key.setOptions({encryptionScheme: 'pkcs1'});
 	}
 
 	Encrypt(message){
-		return this.key.encrypt(text, 'base64');
+		return this.key.encrypt(message, 'base64');
 	}
 
 	Decrypt(encryptMessage){
-		return this.key.decrypt(encrypted, 'utf8');
+		return this.key.decrypt(encryptMessage, 'utf8');
 	}
 
 	GetPublicKey(){

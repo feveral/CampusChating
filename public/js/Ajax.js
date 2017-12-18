@@ -1,6 +1,8 @@
 
 var hostUrl = "http://127.0.0.1";
 
+
+
 function AjaxGet(apiUrl,callback){
 	$(document).ready(function(){ 
 		$.ajax({
@@ -35,3 +37,4 @@ function AjaxPost(apiUrl,postData,callback,errorCallback=DefaultErrorCallback){
 function DefaultErrorCallback(xhr, textStatus, error){
 	console.log(xhr.statusText);
 }
+

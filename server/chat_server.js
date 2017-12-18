@@ -1,4 +1,7 @@
 var socketio = require('socket.io');
+var passport = require('passport');
+var passportSocketIo = require('passport.socketio');
+var cookieParser = require('cookie-parser');
 var AESManager = require('./AESManager.js');
 var io;
 var guestNumber = 1;
@@ -8,6 +11,7 @@ var currentRoom = {};
 var keyList = [];
 
 var aesManager = new AESManager();
+var keyCenter;
 
 exports.listen = function(server) {
     io = socketio.listen(server);
@@ -24,6 +28,10 @@ exports.listen = function(server) {
         handleClientDisconnection(socket, nickNames, namesUsed);
     });
 };
+
+exports.SetKeyCenter = function(kc){
+    keyCenter = kc;
+}
 
 function assignGuestName(socket, guestNumber, nickNames, namesUsed) {
     var name = 'Guest' + guestNumber;
@@ -143,4 +151,3 @@ function handleClientDisconnection(socket) {
 function getKeyByValue(object, value) {
     return Object.keys(object).find(key => object[key] === value);
 }
-

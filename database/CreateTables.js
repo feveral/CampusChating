@@ -23,8 +23,6 @@ var createMember =
 		"Name VARCHAR(50) CHARACTER SET utf8 NOT NULL , " +
 		"Membertype VARCHAR(50) NOT NULL , " +
 		"Email VARCHAR(255) NOT NULL, " +
-		"Password VARCHAR(255) NOT NULL ," +
-		"PRIMARY KEY (Id)" +
 	");";
 
 var createMessage = 
@@ -33,7 +31,6 @@ var createMessage =
 		"Message VARCHAR(255) ," + 
 		"ReceiverId INT NOT NULL," + 
 		"Time DATETIME NOT NULL" + ");";
-
 
 
 DatabaseUtility.ExecuteSQLCommand(dropDatabaseChatroom);

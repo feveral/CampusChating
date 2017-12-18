@@ -8,18 +8,47 @@ module.exports = class MemberManager{
 		this.db = DatabaseUtility.Getdb();
 	}
 
-	AddCustomer(attribute,callback){
+	AddMember(attribute,callback){
 		this.db.query(
 			"INSERT INTO MEMBER " +
-			"(Name,MemberType,Email,Password)" +
 			"VALUES ( " + 
+			"'" + attribute['Id'] +  "' , " + 
 			"'" + attribute['Name'] +  "' , " + 
-			"'" + "Customer" + "' , " +  
 			"'" + attribute['Email'] + "' , " +  
 			"'" + attribute['Password'] + "' ); ",
 			function(err,result){
 				callback(err,result);
 			}  
 		);
+	}
+
+	GetMemberFromId(memberId,callback){
+		this.db.query(
+			"SELECT * " + 
+			"FROM MEMBER " +  
+			"WHERE Id=" + "'" + memberId + "'" + ";",
+			function(err,result){
+				callback(err,result[0]);
+			}
+		);
+	}
+
+	IsSignInCorrect(memberId,password,callback){
+
+		this.GetMemberFromId(memberId,function(err,result){
+			var member = result;
+			if(!result)
+			{
+				callback(err,{success:false,user:result});
+			}
+			else if(result.Password === password)
+			{
+				callback(err,{success:true,user:result})
+			}
+			else
+			{
+				callback(err,{success:false,user:result});
+			}
+		});
 	}
 }

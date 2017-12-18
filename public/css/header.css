@@ -1,0 +1,218 @@
+
+/* Header */
+
+	#header{
+		position: fixed;
+		width: 100%;
+		font-size: 12px;
+		font-weight: bold;
+		letter-spacing: 1px;
+		height: 130px;
+		border-bottom: 2px solid black;
+		z-index: 2;
+		background-color: white;
+	}
+		#header div{
+			display: inline-block;
+		}
+
+	#logo{
+		margin-top: 12px;
+		margin-left: 85px;
+		cursor: pointer;
+	}
+
+	#mainMenu{
+		width: 20%;
+		vertical-align: top;
+		margin-top: 93px;
+		margin-left: 24px;
+	}
+
+		#mainMenu span{
+			padding-bottom: 35px;
+			cursor: pointer;
+			margin-left: 22px;
+			margin-right: 22px;
+		}
+
+	#member{
+		vertical-align: top;
+		padding-top: 5px;
+		margin-top: 85px;
+		margin-right: 30px;
+		float:right;
+		font-size: 18px;
+	}
+
+		#member a{
+			padding-bottom: 40px;
+			cursor: pointer;
+			margin-right: 20px;
+		}
+
+		#member a:hover{
+			color: rgb(221,170,0);
+		}
+
+/* Selector */
+
+	#selector{
+		position: fixed;
+		top: 130px;
+		padding-top: 0px;
+		text-align: center;
+		box-shadow: none;
+		background-color: white; 
+		border-bottom:0.5px solid black;
+		visibility: visible;
+		clear:left;
+		width: 100%;
+		height: 0px;
+		z-index: 1;
+	    -webkit-transition: height 0.4s , padding-top 0.7s , box-shadow 0.4s; /* For Safari 3.1 to 6.0 */
+	    transition: height 0.4s , padding-top 0.7s , box-shadow 0.4s;	
+	    overflow: hidden;
+	}
+
+		#selector div{
+			font-size: 14px;
+			cursor: pointer;
+			margin-right: 90px;
+			display: inline-block;
+			vertical-align: top;
+		}
+			#selector a:nth-child(1){
+				border-radius: 2px;
+				padding:4px 3px 4px 3px;
+				color: white;
+				display: block;
+				background-color: black;
+				width: max-content;
+				margin-bottom: 10px;
+			}
+
+			#selector a{
+				border-radius: 2px;
+				padding:5px 2px 5px 2px;
+				display: block;
+				text-align: left;
+			}
+
+			#selector a:hover{
+				width: max-content;
+				color: white;
+				background-color: #666666;
+			}
+
+/* MemberMenu */
+
+	#memberMenu{
+		position: fixed;
+		border-left: 1px solid black; 
+		border-bottom: 1px solid black;
+		background-color: white;
+		box-shadow: none;
+		top:129px;
+		height: 0px;
+		right: 0px;
+		width: 15%;
+		z-index: 1;
+		text-align: center;
+		border-bottom-left-radius: 5px;
+	    -webkit-transition: height 0.4s , padding-top 0.7s , padding-bottom 0.7s,border 2s ease-out; /* For Safari 3.1 to 6.0 */
+	    transition: height 0.4s , padding-top 0.7s , padding-bottom 0.7s ,border 2s ease-out;	
+	    overflow:hidden;
+	}
+
+		#memberMenu a {
+			font-size: 18px;
+			font-weight: bold;
+			display: block;
+			padding: 10px 0px;
+		}
+
+		#memberMenu a:hover {
+			color:#666666;		
+		}
+
+
+/* ShoppingCar */
+
+	#shoppingCar{
+		position: fixed;
+		border-left: 1px solid black; 
+		border-bottom: 1px solid black;
+		background-color: white;
+		box-shadow: none;
+		top:129px;
+		height: 0px;
+		right: 0px;
+		width: 23%;
+		z-index: 1;
+		font-size: 12px;
+		border-bottom-left-radius: 5px;
+	    -webkit-transition: height 0.3s ease-out, padding-top 0.7s , padding-bottom 0.7s; /* For Safari 3.1 to 6.0 */
+	    transition: height 0.3s ease-out, padding-top 0.7s , padding-bottom 0.7s;	
+	    overflow:scroll;
+	}
+		#shoppingCar > p {
+			width: 100%;
+			height: 50px;
+			line-height: 70px;
+			font-size: 15px;
+			font-weight: bold;
+			display: block;
+			text-align: center;
+		}
+
+		#shoppingCar > div:nth-child(2) {
+			display: block;
+			text-align: center;
+			margin-bottom: 20px;
+		}
+
+		#shoppingCar > div:last-child {
+			margin-top: 10px;
+			height: 50px;
+			text-align: center;
+		}
+
+			#shoppingCar > div > a {
+				display: inline-block;
+				width: 40%;
+				font-size: 14px;
+				text-align: center;
+				background-color: black;
+				color: white;
+				padding: 10px 25px;
+				margin: 0px 10px;
+				border-radius: 5px;
+			}
+
+				#shoppingCar > div > div > * {
+					vertical-align: top;
+					height: 90px;
+					line-height: 90px;
+					display: inline-block;
+					padding-right: 5px;
+					margin-bottom: 10px;
+				}
+
+				#shoppingCar > div > div > p:nth-child(2) {
+					border-bottom: 1px #ededed solid;
+					width: 55%;
+				}
+
+				#shoppingCar > div > div > p:nth-child(3) {
+					border-bottom: 1px #ededed solid;
+					width: 15%;
+				}
+
+				#shoppingCar > div > div > img {
+					width: 60px;
+				}
+
+
+
+
