@@ -133,6 +133,3 @@ function handleClientDisconnection(socket) {
         delete nickNames[socket.id];
     });
 }
-
-
-
