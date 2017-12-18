@@ -67,8 +67,8 @@ function handleNameChangeAttempts(socket, nickNames, namesUsed) {
     socket.on('nameAttempt', function(name) {
         if (name.indexOf('Guest') == 0) {
             socket.emit('nameResult', {
-            success: false,
-            message: 'Names cannot begin with "Guest".'
+	            success: false,
+	            message: 'Names cannot begin with "Guest".'
             });
         } 
         else 
@@ -102,11 +102,12 @@ function handleNameChangeAttempts(socket, nickNames, namesUsed) {
 function handleMessageBroadcasting(socket) {
     socket.on('BroadCastmessage', function (message) {
     	message.text = aesManager.Decrypt(message.text);
+    	var userId = getKeyByValue(nickNames,message.room); 
         if(message.room != "Lobby" )
         {
             io.sockets.sockets[userId].emit('message',{
-            	room:nickNames[socket.id],
-            	toUser:userId,
+            	room: nickNames[socket.id],
+            	toUser: userId,
             	text: aesManager.Encrypt(nickNames[socket.id]+':'+ message.text)
             });
         }
@@ -132,4 +133,12 @@ function handleClientDisconnection(socket) {
         delete namesUsed[nameIndex];
         delete nickNames[socket.id];
     });
+}
+
+function printSocketId(socket){
+	console.log(socket.id);
+}
+
+function getKeyByValue(object, value) {
+    return Object.keys(object).find(key => object[key] === value);
 }
