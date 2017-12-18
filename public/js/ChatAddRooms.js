@@ -1,5 +1,5 @@
 function divEscapedContentElement(message) {
-    return $('<div class="user"></div>').text(message);
+    return '<div>' + message + '</div>';
 }
 
 function divSystemContentElement(message) {
@@ -24,9 +24,49 @@ function processUserInput(chatApp, socket) {
     else 
     {
         chatApp.sendMessage( $('#room').text(), message);
-        $('#messages').append(divEscapedContentElement(message));
+        PrintWhatYouEnter(chatApp,message);
         $('#messages').scrollTop($('#messages').prop('scrollHeight'));
     }
 
     $('#send-message').val('');
+}
+
+function PrintWhatYouEnter(chatApp,message){
+	console.log("cchh" + chatApp.getNickName());
+    $('#messages').append('<div class="privateText">' + 
+    	divEscapedContentElement(chatApp.getNickName()) + 
+    	divEscapedContentElement(message) + 
+    	'</div>');
+}
+
+function PrintReceiveMessage(message,lobbyPersonalMessage){
+	if((document.getElementById("room").textContent === message.room) || lobbyPersonalMessage)
+	{
+		console.log(message);
+		var name = message.text.split(":")[0];
+		var content = message.text.split(":")[1];
+		$('#messages').append('<div class="privateText">' + 
+		divEscapedContentElement(name) + 
+		divEscapedContentElement(content) + 
+		'</div>');
+	}
+}
+
+function PrintBroadcastMessage(message){
+	if(document.getElementById("room").textContent === "Lobby")
+	{	
+		var newElement = $('<div class="public"></div>').text(message);
+		$('#messages').append(newElement);
+	}
+}
+
+//determine if person speak in room or system speak
+function IsBroadcastPersonal(message){
+	if(document.getElementById("room").textContent === "Lobby")
+	{
+		if(message.system)
+			PrintBroadcastMessage(message.text);
+		else
+			PrintReceiveMessage(message,true);
+	}
 }

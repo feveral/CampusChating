@@ -79,6 +79,8 @@ body{
 
 #messages{
 	margin-top:4%;
+	max-height: 66vh;
+	overflow: auto;
 }
 	#messages div{
 		line-height: 20px;
@@ -119,10 +121,6 @@ body{
 
 	}
 
-
-
-
-
 #room-list {
 	height:80vh;
 	overflow: auto;
@@ -140,8 +138,6 @@ body{
 	color: rgb(17, 138, 214);
 	font-weight:bold;
 }
-
-
 
 .pop{
 	height: 0%;
@@ -181,4 +177,17 @@ body{
 	color: grey;
 	text-align: center;
 	font-size: 14px;
+	padding-bottom: 1%;
 }
+
+.privateText{
+	padding-left: 20%;
+	padding-bottom: 1.5%;
+}
+
+	.privateText div:nth-child(1){
+		color: #3a6d99;
+	}
+
+
+

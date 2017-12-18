@@ -19,11 +19,10 @@ var dropTableMessage =
 
 var createMember =
 	"CREATE TABLE MEMBER" +
-		"(Id INT NOT NULL, " +
+		"(Id INT NOT NULL , " +
 		"Name VARCHAR(50) CHARACTER SET utf8 NOT NULL , " +
-		"Email VARCHAR(255) , " +
-		"Password VARCHAR(255) NOT NULL ," +
-		"PRIMARY KEY (Id)" +
+		"Membertype VARCHAR(50) NOT NULL , " +
+		"Email VARCHAR(255) NOT NULL, " +
 	");";
 
 var createMessage = 
