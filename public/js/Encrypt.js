@@ -117,3 +117,4 @@ function decryptMessage(text){
 }
 
 new EncryptManager();
+

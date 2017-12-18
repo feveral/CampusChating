@@ -69,7 +69,7 @@ module.exports = class{
 		    }
 		);
 
-		this.router.get('/name',function(req,res){
+		this.router.get('/id',function(req,res){
 			if(!req.user)
 			{
 				res.send(JSON.stringify({success:false}));

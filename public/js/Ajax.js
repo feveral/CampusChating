@@ -37,3 +37,4 @@ function AjaxPost(apiUrl,postData,callback,errorCallback=DefaultErrorCallback){
 function DefaultErrorCallback(xhr, textStatus, error){
 	console.log(xhr.statusText);
 }
+

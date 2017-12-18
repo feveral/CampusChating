@@ -1,4 +1,6 @@
+var http = require('http');
 var express = require('express');
+var socketio = require('socket.io');
 var BodyParser = require('body-parser');
 var chatServer = require('./server/chat_server.js');
 var KeyServer = require('./server/KeyServer.js');
@@ -10,7 +12,8 @@ var app = express();
 var keyRouter = express.Router();
 var loginRouter = express.Router();
 
-new KeyServer(keyRouter);
+var keyCenter = new KeyCenter();
+new KeyServer(keyCenter,keyRouter);
 new LoginServer(app,loginRouter);
 
 // app.use(BodyParser.urlencoded({ extended: false }));
@@ -20,3 +23,4 @@ app.use('/key', keyRouter);
 app.use(express.static('public'));
 
 chatServer.listen(app.listen(80));
+chatServer.SetKeyCenter(keyCenter);

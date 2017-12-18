@@ -1,13 +1,12 @@
 'use strict';
 var RSAManager = require('./RSAManager.js');
 var AESManager = require('./AESManager.js');
-var KeyCenter = require('./KeyCenter.js');
 
 module.exports = class{
 
-	constructor(router){
+	constructor(keyCenter,router){
 		this.router = router;
-		this.keyCenter = new KeyCenter();
+		this.keyCenter = keyCenter;
 		this.rsaManager = this.keyCenter.GetRsaManager();
 		this.aesManager = new AESManager();
 		this.SetAPI();
@@ -23,11 +22,7 @@ module.exports = class{
 
 		self.router.post('/aesKey',function(req,res){
 			var decrypt = self.rsaManager.Decrypt(req.body.key);
-			var aesKey = JSON.parse(decrypt);
+			self.keyCenter.ResetMemberAesKey( JSON.parse(decrypt) );
 		});
-
-		this.router.get('/a',function(req,res){
-			res.end("aqwrdefrewqt");
-		})		
 	}
 }

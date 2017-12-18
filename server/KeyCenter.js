@@ -9,7 +9,7 @@ module.exports = class{
 		this.allAesKey = {};
 	}
 
-	AddMember(memberId,key){
+	ResetMemberAesKey(memberId,key){
 		this.allAesKey[memberId] = key;
 	}
 
