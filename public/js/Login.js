@@ -29,7 +29,9 @@ function Logout(){
 function ChangeName(){
 	var apiUrl = "/login/id";
 	var callback = function(msg){
+		console.log(msg);
 		var object = JSON.parse(msg);
+		chatApp.processCommand('/nick ' + object['data']);
 	}
 	AjaxGet(apiUrl,callback);
 }
