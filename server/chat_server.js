@@ -41,6 +41,7 @@ function joinRoom(socket, room) {
     currentRoom[socket.id] = room;
     socket.emit('joinResult', {room: room});
     socket.broadcast.to(room).emit('BroadCastmessage', {
+    	system: true,
         text:  aesManager.Encrypt( nickNames[socket.id] + ' has joined ' + room + '.' )
     });
 
@@ -59,7 +60,9 @@ function joinRoom(socket, room) {
         }
     }
     usersInRoomSummary += '.';
-    socket.emit('BroadCastmessage', {text: aesManager.Encrypt(usersInRoomSummary)});
+    socket.emit('BroadCastmessage', {
+    	system: true,
+    	text: aesManager.Encrypt(usersInRoomSummary)});
   }
 }
 
@@ -85,6 +88,7 @@ function handleNameChangeAttempts(socket, nickNames, namesUsed) {
                     name: name
                 });
                 socket.broadcast.to(currentRoom[socket.id]).emit('BroadCastmessage', {
+                	system: true,
                     text: aesManager.Encrypt(previousName + ' is now known as ' + name + '.')
                 });
             } 
@@ -114,6 +118,7 @@ function handleMessageBroadcasting(socket) {
         else
         {
             socket.broadcast.to(message.room).emit('BroadCastmessage', {
+            	system: false,
                 text: aesManager.Encrypt(nickNames[socket.id] + ': ' + message.text)
             });
         }
@@ -133,10 +138,6 @@ function handleClientDisconnection(socket) {
         delete namesUsed[nameIndex];
         delete nickNames[socket.id];
     });
-}
-
-function printSocketId(socket){
-	console.log(socket.id);
 }
 
 function getKeyByValue(object, value) {

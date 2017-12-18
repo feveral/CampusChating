@@ -1,5 +1,5 @@
+var chatApp = new Chat(socket);
 $(document).ready(function() {
-    var chatApp = new Chat(socket);
         $('#send-form').submit(function() {
         processUserInput(chatApp, socket);
         return false;
