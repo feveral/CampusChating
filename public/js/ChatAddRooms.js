@@ -7,7 +7,15 @@ function divSystemContentElement(message) {
 }
 
 function divAddIdContentElement(message) {
-    return '<div>' + message +'</div>';
+    return '<div onclick="ClickRoom(this)">' + message +'</div>';
+}
+
+function ClickRoom(room){
+    $("#room-list > div").css("background-color", "white");
+    $("#room-list > div").css("color", "black");
+    $(room).css("background-color","#5682a3");
+    $(room).css("color","white");
+    $('#messages').empty();
 }
 
 function processUserInput(chatApp, socket) {
