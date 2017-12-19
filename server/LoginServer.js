@@ -72,7 +72,7 @@ module.exports = class{
 		    }
 		);
 
-		this.router.get('/id',function(req,res){
+		this.router.get('/member',function(req,res){
 			if(!req.user)
 			{
 				res.send(JSON.stringify({success:false}));
@@ -80,7 +80,7 @@ module.exports = class{
 			else
 			{
 				new MemberManager().GetMemberFromId(req.user,function(err,result){
-			    	res.send(JSON.stringify({success:true,data:result.Id}));
+			    	res.send(JSON.stringify({success:true,data:result}));
 		    	});
 			}
 		});

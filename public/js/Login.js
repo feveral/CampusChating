@@ -27,7 +27,7 @@ function Logout(){
 }
 
 function ChangeName(){
-	var apiUrl = "/login/id";
+	var apiUrl = "/login/member";
 	var callback = function(msg){
 		var object = JSON.parse(msg);
 		if(!object['success'])
@@ -35,8 +35,9 @@ function ChangeName(){
 			location.href = hostUrl + "/login.html";
 			return;
 		}
-		chatApp.processCommand('/nick ' + object['data']);
+		chatApp.processCommand('/nick ' + object['data']['Id']);
 		encryptManager.Initial();
+		$('#header > div:nth-child(3)').text("Hi! " + object['data']['Name']);	
 	}
 	AjaxGet(apiUrl,callback);
 }
@@ -59,13 +60,6 @@ function ClickMemberButton(){
 	AjaxGet(apiUrl,callback);
 }
 
-function ClickOtherAccountButton(){
-	var apiUrl = GetServerUrl() + "/login/logout";
-	var callback = function(msg){
-		location.href = "/login.html";
-	}
-	AjaxGet(apiUrl,callback);
-}
 
 function ChangeToLogin(){
 	$(document).ready(function(){

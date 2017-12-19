@@ -6,6 +6,7 @@
     <link rel='stylesheet' href='/css/main.css'></link>
     <script src="https://cdn.rawgit.com/ricmoo/aes-js/e27b99df/index.js" type="text/javascript" ></script>
     <script src='http://code.jquery.com/jquery-1.8.0.min.js' type='text/javascript'></script>
+    <script src='/js/TimeUtility.js' type='text/javascript'></script>
     <script src='/js/jsencrypt.min.js' type='text/javascript'></script>
     <script src='/js/Ajax.js' type='text/javascript'></script>
     <script src='/js/Login.js' type='text/javascript'></script>
@@ -18,7 +19,8 @@
     <script src='/js/Style.js' type='text/javascript'></script>
     <script src='/js/Encrypt.js' type='text/javascript'></script>
     <script src='/js/index.js' type='text/javascript'></script>
-    <script src='/js/GetDataFromServer.js' type='text/javascript'></script>
+    <script src='/js/ClickHandler.js' type='text/javascript'></script>
+    <script src='/js/ExploreMember.js' type='text/javascript'></script>
 </head>
 
 <body>
@@ -30,8 +32,14 @@
 </div>
 
 <div id='content'>
-    <div id='telegram'>Telegram</div>
-    <div id='room'></div>
+
+    <div id="header">
+        <div id='title'>Telegram</div>
+        <div id='room'></div>
+        <div>登入</div>
+        <div onclick="Logout()">登出</div>
+    </div>
+
     <div>
 	    <div id='roomSum'>
 	        <form id='add-room-form'>
@@ -39,7 +47,7 @@
 	        </form>   
 	        <div id="room-list"></div>
             <div id="functionButton">
-                <div>聊天</div><div>探索</div>
+                <div>聊天</div><div onclick="ClickExplore()">探索</div>
             </div>
 	    </div>
 	    <div id='messagesRoom'>
