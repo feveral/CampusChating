@@ -1,7 +1,5 @@
 
-var hostUrl = "http://127.0.0.1";
-
-
+var hostUrl = "http://0.0.0.0";
 
 function AjaxGet(apiUrl,callback){
 	$(document).ready(function(){ 
