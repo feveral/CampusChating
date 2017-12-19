@@ -9,7 +9,13 @@ function ClickRoom(room){
     $(room).css("background-color","#5d8db3");
     $(room).css("color","white");
     $('#messages').empty();
-    $('#room').text($(room).text());
-    GetMessageFromServer($(room).text());
-    $("#messages").animate({ scrollTop: $(document).height() }, 1);
+    $('#room').text($(room).children().first().text());
+    addIdOnTitle($(room).children().next().text());
+    GetMessageFromServer($(room).children().next().text());
+    $("#messages").animate({ scrollTop: 3000 }, 1);
 }
+
+function addIdOnTitle(Id){
+	$('#room').append(divEscapedContentElement(Id));
+}
+

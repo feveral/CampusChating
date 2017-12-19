@@ -24,7 +24,10 @@ function processUserInput(chatApp, socket) {
 	    } 
 	    else 
 	    {
-	        chatApp.sendMessage( $('#room').text(), message, GetDateTime());
+	    	if($('#room').text() == "大廳")
+	    		chatApp.sendMessage("大廳", message, GetDateTime());
+	    	else
+	        	chatApp.sendMessage( $('#room>div').text(), message, GetDateTime());
 	        PrintWhatYouEnter(chatApp,message,ProcessSendTime(GetDateTime()));
 	        $('#messages').scrollTop($('#messages').prop('scrollHeight'));
 	    }
@@ -45,8 +48,11 @@ function PrintWhatYouEnter(chatApp,message,time){
 }
 
 function PrintReceiveMessage(message,time,lobbyPersonalMessage){
-	if((document.getElementById("room").textContent === message.room) || lobbyPersonalMessage)
+	var roomTitle = GetTitleString();
+	console.log("aaa" + roomTitle);
+	if((roomTitle === message.room) || lobbyPersonalMessage)
 	{
+		console.log("ccc");
 		var name = message.text.split(":")[0];
 		var content = message.text.split(":")[1];
 		$('#messages').append('<div class="privateText">' +
@@ -57,14 +63,35 @@ function PrintReceiveMessage(message,time,lobbyPersonalMessage){
 		'<div class="time">' + 
 		divEscapedContentElement(time) + 
 		'</div></div>');
+		$("#messages").animate({ scrollTop: 3000 }, 1);
 	}
 }
 
+function GetTitleString()
+{
+	var divs = document.getElementsByTagName("div");
+	var x = document.getElementById("room");
+	for(var i = 0; i < divs.length;i++)
+	{
+		   	if(divs[i] == x)
+		   {
+		     var previous = divs[i - 1];
+		     console.log(previous);
+		     var next = divs[i + 1];
+		     console.log(next.textContent);
+		   }
+	}
+	return next.textContent;
+}
+
 function PrintBroadcastMessage(message){
+	console.log(document.getElementById("room").textContent);
 	if(document.getElementById("room").textContent === "大廳")
 	{	
+		console.log("checkit");
 		var newElement = $('<div class="public"></div>').text(message);
 		$('#messages').append(newElement);
+		console.log("checkit");
 	}
 }
 
@@ -72,10 +99,11 @@ function PrintBroadcastMessage(message){
 function IsBroadcastPersonal(message){
 	if(document.getElementById("room").textContent === "大廳")
 	{
+		console.log("kk"+ message.time);
 		if(message.system)
 			PrintBroadcastMessage(message.text);
 		else
-			PrintReceiveMessage(message,true);
+			PrintReceiveMessage(message,ProcessSendTime(message.time),true);
 	}
 }
 

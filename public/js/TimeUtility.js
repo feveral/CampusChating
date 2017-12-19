@@ -38,7 +38,7 @@ function ProcessReceiveTime(wholeTime){
 		hour = hour - 12;
 		pmOram = "PM";
 	}
-	var time = hour + ":" + minute + ":" + second + pmOram;
+	var time = hour + ":" + minute + ":" + second +" "+  pmOram;
 	return time;
 }
 
@@ -49,12 +49,12 @@ function ProcessSendTime(wholeTime){
 	var hour = noDate.split(":")[0];
 	var minute = noDate.split(":")[1];
 	var second = noDate.split(":")[2];
-	if(IsPm)
+	if(IsPm(hour))
 	{
 		hour = hour -12;
 		pmOram = "PM";
 	}
-	var time = hour + ":" + minute + ":" + second + pmOram;
+	var time = hour + ":" + minute + ":" + second +" "+ pmOram;
 	return time;
 }
 
@@ -65,6 +65,7 @@ function IsOverDay(hour){
 }
 
 function IsPm(hour){
+	console.log(hour);
 	var boolPm = false;
 	if(hour >= 13 && hour <= 24)
 		boolPm = true;

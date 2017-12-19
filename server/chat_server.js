@@ -119,11 +119,8 @@ function handleNameChangeAttempts(socket, nickNames, namesUsed) {
 function handleMessageBroadcasting(socket) {
     socket.on('BroadCastmessage', function (message) {
     	var userId = getKeyByValue(nickNames,message.room); 
-    	console.log("ss" + userId);
         if(message.room != "大廳" )
         {
-        	console.log(keyCenter.GetAesManagerByMemberId(nickNames[socket.id]).GetKey());
-        	console.log(keyCenter.GetAesManagerByMemberId(nickNames[message.room]).GetKey());
         	message.text = keyCenter.GetAesManagerByMemberId(nickNames[socket.id]).Decrypt(message.text);
         	console.log(message.text);
         	messageManager.AddMessage(
@@ -138,14 +135,16 @@ function handleMessageBroadcasting(socket) {
             io.sockets.sockets[userId].emit('message',{
             	room: nickNames[socket.id],
             	toUser: userId,
-            	text: keyCenter.GetAesManagerByMemberId(message.room).Encrypt(nickNames[socket.id]+':'+ message.text)
+            	text: keyCenter.GetAesManagerByMemberId(message.room).Encrypt(nickNames[socket.id]+':'+ message.text),
+            	time: message.time
             });
         }
         else
         {
             socket.broadcast.to(message.room).emit('BroadCastmessage', {
             	system: false,
-                text: (nickNames[socket.id] + ': ' + message.text)
+                text: (nickNames[socket.id] + ': ' + message.text),
+                time: message.time
             });
         }
     });
