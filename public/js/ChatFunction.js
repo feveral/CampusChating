@@ -6,8 +6,10 @@ var Chat = function(socket) {
 Chat.prototype.sendMessage = function(room, text) {
     var message = {
         room: room,
-        text: encrypt(text)
+        text: encryptManager.AESEncrypt( text )
     };
+    if(room == "大廳")
+        message['text'] = text;
     this.socket.emit('BroadCastmessage', message);
 };
 

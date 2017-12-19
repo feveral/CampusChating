@@ -40,7 +40,6 @@ function processUserInput(chatApp, socket) {
 }
 
 function PrintWhatYouEnter(chatApp,message){
-	console.log("cchh" + chatApp.getNickName());
     $('#messages').append('<div class="privateText">' + 
     	divEscapedContentElement(chatApp.getNickName()) + 
     	divEscapedContentElement(message) + 
@@ -50,7 +49,6 @@ function PrintWhatYouEnter(chatApp,message){
 function PrintReceiveMessage(message,lobbyPersonalMessage){
 	if((document.getElementById("room").textContent === message.room) || lobbyPersonalMessage)
 	{
-		console.log(message);
 		var name = message.text.split(":")[0];
 		var content = message.text.split(":")[1];
 		$('#messages').append('<div class="privateText">' + 
@@ -61,7 +59,7 @@ function PrintReceiveMessage(message,lobbyPersonalMessage){
 }
 
 function PrintBroadcastMessage(message){
-	if(document.getElementById("room").textContent === "Lobby")
+	if(document.getElementById("room").textContent === "大廳")
 	{	
 		var newElement = $('<div class="public"></div>').text(message);
 		$('#messages').append(newElement);
@@ -70,7 +68,7 @@ function PrintBroadcastMessage(message){
 
 //determine if person speak in room or system speak
 function IsBroadcastPersonal(message){
-	if(document.getElementById("room").textContent === "Lobby")
+	if(document.getElementById("room").textContent === "大廳")
 	{
 		if(message.system)
 			PrintBroadcastMessage(message.text);

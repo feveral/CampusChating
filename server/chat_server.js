@@ -13,12 +13,16 @@ var keyList = [];
 var aesManager = new AESManager();
 var keyCenter;
 
+exports.SetKeyCenter = function(kc){
+    keyCenter = kc;
+}
+
 exports.listen = function(server) {
     io = socketio.listen(server);
     io.set('log level', 1);
     io.sockets.on('connection', function (socket) {
         guestNumber = assignGuestName(socket, guestNumber, nickNames, namesUsed);
-        joinRoom(socket, 'Lobby');
+        joinRoom(socket, '大廳');
         handleMessageBroadcasting(socket, nickNames);
         handleNameChangeAttempts(socket, nickNames, namesUsed);
         handleRoomJoining(socket);
@@ -28,10 +32,6 @@ exports.listen = function(server) {
         handleClientDisconnection(socket, nickNames, namesUsed);
     });
 };
-
-exports.SetKeyCenter = function(kc){
-    keyCenter = kc;
-}
 
 function assignGuestName(socket, guestNumber, nickNames, namesUsed) {
     var name = 'Guest' + guestNumber;
@@ -50,7 +50,7 @@ function joinRoom(socket, room) {
     socket.emit('joinResult', {room: room});
     socket.broadcast.to(room).emit('BroadCastmessage', {
     	system: true,
-        text:  aesManager.Encrypt( nickNames[socket.id] + ' has joined ' + room + '.' )
+        text:  ( nickNames[socket.id] + ' has joined ' + room + '.' )
     });
 
     var usersInRoom = io.sockets.clients(room);
@@ -61,17 +61,19 @@ function joinRoom(socket, room) {
             var userSocketId = usersInRoom[index].id;
             if (userSocketId != socket.id) 
             {
-                if (index > 0) {
-                usersInRoomSummary += ', ';
+                if (index > 0) 
+                {
+                    usersInRoomSummary += ', ';
+                }
+                usersInRoomSummary += nickNames[userSocketId];
             }
-            usersInRoomSummary += nickNames[userSocketId];
         }
+        usersInRoomSummary += '.';
+        socket.emit('BroadCastmessage', {
+        	system: true,
+        	text: usersInRoomSummary
+        });
     }
-    usersInRoomSummary += '.';
-    socket.emit('BroadCastmessage', {
-    	system: true,
-    	text: aesManager.Encrypt(usersInRoomSummary)});
-  }
 }
 
 function handleNameChangeAttempts(socket, nickNames, namesUsed) {
@@ -97,14 +99,14 @@ function handleNameChangeAttempts(socket, nickNames, namesUsed) {
                 });
                 socket.broadcast.to(currentRoom[socket.id]).emit('BroadCastmessage', {
                 	system: true,
-                    text: aesManager.Encrypt(previousName + ' is now known as ' + name + '.')
+                    text: (previousName + ' is now known as ' + name + '.')
                 });
             } 
             else 
             {
                 socket.emit('nameResult', {
                 success: false,
-                message: aesManager.Encrypt('That name is already in use.')
+                message: keyCenter.GetAesManagerByMemberId(nickNames[socket.id]).Encrypt('That name is already in use.')
                 });
             }
         }
@@ -113,21 +115,22 @@ function handleNameChangeAttempts(socket, nickNames, namesUsed) {
 
 function handleMessageBroadcasting(socket) {
     socket.on('BroadCastmessage', function (message) {
-    	message.text = aesManager.Decrypt(message.text);
+
     	var userId = getKeyByValue(nickNames,message.room); 
-        if(message.room != "Lobby" )
+        if(message.room != "大廳" )
         {
+            message.text = keyCenter.GetAesManagerByMemberId(nickNames[socket.id]).Decrypt(message.text);
             io.sockets.sockets[userId].emit('message',{
             	room: nickNames[socket.id],
             	toUser: userId,
-            	text: aesManager.Encrypt(nickNames[socket.id]+':'+ message.text)
+            	text: keyCenter.GetAesManagerByMemberId(message.room).Encrypt(nickNames[socket.id]+':'+ message.text)
             });
         }
         else
         {
             socket.broadcast.to(message.room).emit('BroadCastmessage', {
             	system: false,
-                text: aesManager.Encrypt(nickNames[socket.id] + ': ' + message.text)
+                text: (nickNames[socket.id] + ': ' + message.text)
             });
         }
     });

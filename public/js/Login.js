@@ -21,7 +21,7 @@ function HandleLoginFail(xhr, textStatus, error){
 function Logout(){
 	var apiUrl = "/login/logout";
 	var callback = function(msg){
-		location.href = GetServerUrl();
+		location.href = hostUrl;
 	}
 	AjaxGet(apiUrl,callback);
 }
@@ -29,9 +29,14 @@ function Logout(){
 function ChangeName(){
 	var apiUrl = "/login/id";
 	var callback = function(msg){
-		console.log(msg);
 		var object = JSON.parse(msg);
+		if(!object['success'])
+		{
+			location.href = hostUrl + "/login.html";
+			return;
+		}
 		chatApp.processCommand('/nick ' + object['data']);
+		encryptManager.Initial();
 	}
 	AjaxGet(apiUrl,callback);
 }

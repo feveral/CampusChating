@@ -2,6 +2,8 @@
 var socket = io.connect();
 
 $(document).ready(function() {
+	encryptManager = new EncryptManager();
+
 	socket.emit('rooms');
 
 	socket.on('nameResult', function(result) {
@@ -13,7 +15,7 @@ $(document).ready(function() {
 	    } 
 	    else 
 	    {
-	    	message = decryptMessage(result.message);
+	    	message = encryptManager.AESDecrypt(result.message);
 	    }
 	    PrintBroadcastMessage(message);
 	});
@@ -25,16 +27,14 @@ $(document).ready(function() {
 	});
 
 	socket.on('BroadCastmessage', function (message) {
-		message.text = decryptMessage(message.text);
+		message.text = message.text;
 		IsBroadcastPersonal(message);
-		console.log(message.text);
     	showWindows(message.text);
     });
 
 	socket.on('message', function (message) {
-		message.text = decryptMessage(message.text);
+		message.text = encryptManager.AESDecrypt(message.text);
     	addRoom(message.room);
-    	console.log(message);
     	PrintReceiveMessage(message);
 	});
 

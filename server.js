@@ -22,5 +22,5 @@ app.use('/login', loginRouter);
 app.use('/key', keyRouter);
 app.use(express.static('public'));
 
-chatServer.listen(app.listen(80));
 chatServer.SetKeyCenter(keyCenter);
+chatServer.listen(app.listen(80));
