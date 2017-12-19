@@ -26,9 +26,20 @@ function Logout(){
 	AjaxGet(apiUrl,callback);
 }
 
+function ChangeName(){
+	var apiUrl = "/login/id";
+	var callback = function(msg){
+		console.log(msg);
+		var object = JSON.parse(msg);
+		chatApp.processCommand('/nick ' + object['data']);
+	}
+	AjaxGet(apiUrl,callback);
+}
+
+
 function ClickMemberButton(){
 
-	var apiUrl = "/login/getUserName";
+	var apiUrl = "/login/id";
 	var callback = function(msg){
 		var object = JSON.parse(msg);
 		if(object.success)

@@ -77,7 +77,7 @@ module.exports = class{
 			else
 			{
 				new MemberManager().GetMemberFromId(req.user,function(err,result){
-			    	res.send(JSON.stringify({success:true,data:result.Name}));
+			    	res.send(JSON.stringify({success:true,data:result.Id}));
 		    	});
 			}
 		});

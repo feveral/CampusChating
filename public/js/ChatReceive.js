@@ -38,7 +38,7 @@ $(document).ready(function() {
     	PrintReceiveMessage(message);
 	});
 
-	$('#send-message').focus();
+    $('#send-message').focus();
 
 	socket.on('rooms', function(rooms) {
 		for(var room in rooms) 

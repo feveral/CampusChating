@@ -1,15 +1,21 @@
 $(document).ready(function(){
-    $('#room-list').click(function(e){
-    	$("#room-list div").css("background-color", "white");
-    	$("#room-list ").css("background-color", "white");
-    	$("#room-list div").css("color", "black");
-    	console.log(e);
-    	$(e.target).css("background-color","#5682a3 ");
-    	$(e.target).css("color","white");
-  		$('#room').text($(e.target).text());
-  		$('#messages').empty();
-    });
+
+
+
+
+    // $('#room-list').click(function(e){
+    // 	$("#room-list div").css("background-color", "black");
+    // 	$("#room-list ").css("background-color", "white");
+    // 	$("#room-list div").css("color", "black");
+    // 	$(e.target).css("background-color","#5682a3 ");
+    // 	$(e.target).css("color","white");
+  		// $('#room').text($(e.target).text());
+  		// $('#messages').empty();
+    // });
+    
 });
+
+
 
 
 function showWindows(notifyMessage){
