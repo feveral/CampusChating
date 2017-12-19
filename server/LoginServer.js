@@ -24,7 +24,10 @@ module.exports = class{
     		passwordField: 'Password',
 		},
     	function (id, password, done) {
+
+
     		new MemberManager().IsSignInCorrect(id,password,function(err,result){
+
     			if(err || (!result))
     			{
             		return done(null, false, { message: 'Invalid user' });

@@ -3,6 +3,7 @@ var passport = require('passport');
 var passportSocketIo = require('passport.socketio');
 var cookieParser = require('cookie-parser');
 var AESManager = require('./AESManager.js');
+var MessageManager = require('./MessageManager.js');
 var io;
 var guestNumber = 1;
 var nickNames = {};
@@ -11,6 +12,8 @@ var currentRoom = {};
 var keyList = [];
 
 var aesManager = new AESManager();
+var messageManager = new MessageManager();
+var DatabaseUtility = require('../database/DatabaseUtility.js');
 var keyCenter;
 
 exports.SetKeyCenter = function(kc){
@@ -119,7 +122,19 @@ function handleMessageBroadcasting(socket) {
     	var userId = getKeyByValue(nickNames,message.room); 
         if(message.room != "大廳" )
         {
-            message.text = keyCenter.GetAesManagerByMemberId(nickNames[socket.id]).Decrypt(message.text);
+        	console.log(keyCenter.GetAesManagerByMemberId(nickNames[socket.id]).GetKey());
+        	console.log(keyCenter.GetAesManagerByMemberId(nickNames[message.room]).GetKey());
+        	message.text = keyCenter.GetAesManagerByMemberId(nickNames[socket.id]).Decrypt(message.text);
+        	console.log(message.text);
+        	messageManager.AddMessage(
+        		{
+					SenderId: nickNames[socket.id],
+					Message: message.text,
+					ReceiverId: message.room,
+					Time: getDateTime()
+				},
+				DatabaseUtility.callback
+			);
             io.sockets.sockets[userId].emit('message',{
             	room: nickNames[socket.id],
             	toUser: userId,
@@ -153,4 +168,28 @@ function handleClientDisconnection(socket) {
 
 function getKeyByValue(object, value) {
     return Object.keys(object).find(key => object[key] === value);
+
+}
+
+function getDateTime() {
+    var date = new Date();
+
+    var hour = date.getHours();
+    hour = (hour < 10 ? "0" : "") + hour;
+
+    var min  = date.getMinutes();
+    min = (min < 10 ? "0" : "") + min;
+
+    var sec  = date.getSeconds();
+    sec = (sec < 10 ? "0" : "") + sec;
+
+    var year = date.getFullYear();
+
+    var month = date.getMonth() + 1;
+    month = (month < 10 ? "0" : "") + month;
+
+    var day  = date.getDate();
+    day = (day < 10 ? "0" : "") + day;
+
+    return year + "-" + month + "-" + day + " " + hour + ":" + min + ":" + sec;
 }

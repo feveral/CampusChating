@@ -22,4 +22,18 @@ module.exports = class MessageManager{
 			}  
 		);
 	}
+
+	GetMessage(SenderId,ReceiverId,callback){
+		this.db.query(
+			"SELECT * FROM MESSAGE " +
+			"WHERE SenderId =" +
+			SenderId + 
+			" AND "+ 
+			"ReceiverId=" +  
+			ReceiverId+ " ; " ,
+			function(err,result){
+				callback(err,result);
+			}  
+		);
+	}
 }

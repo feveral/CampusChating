@@ -14,8 +14,8 @@ module.exports = class MemberManager{
 			"VALUES ( " + 
 			"'" + attribute['Id'] +  "' , " + 
 			"'" + attribute['Name'] +  "' , " + 
-			"'" + attribute['Email'] + "' , " +  
-			"'" + attribute['Password'] + "' ); ",
+			"'" + attribute['Password'] + "' , " +  
+			"'" + attribute['Email'] + "' ); ",
 			function(err,result){
 				callback(err,result);
 			}  

@@ -21,14 +21,14 @@ var createMember =
 	"CREATE TABLE MEMBER" +
 		"(Id INT NOT NULL , " +
 		"Name VARCHAR(50) CHARACTER SET utf8 NOT NULL , " +
-		"Membertype VARCHAR(50) NOT NULL , " +
-		"Email VARCHAR(255) NOT NULL, " +
+		"Password VARCHAR(50) NOT NULL , " +
+		"Email VARCHAR(255) " +
 	");";
 
 var createMessage = 
 	"CREATE TABLE MESSAGE" + 
 		"(SenderId INT NOT NULL, " + 
-		"Message VARCHAR(255) ," + 
+		"Message VARCHAR(255) CHARACTER SET utf8 NOT NULL ," + 
 		"ReceiverId INT NOT NULL," + 
 		"Time DATETIME NOT NULL" + ");";
 

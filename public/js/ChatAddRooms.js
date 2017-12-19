@@ -16,6 +16,9 @@ function ClickRoom(room){
     $(room).css("background-color","#5682a3");
     $(room).css("color","white");
     $('#messages').empty();
+    $('#room').text($(room).text());
+    console.log($(room).text());
+    getMessageFromServer($(room).text());
 }
 
 function processUserInput(chatApp, socket) {
@@ -78,3 +81,13 @@ function IsBroadcastPersonal(message){
 			PrintReceiveMessage(message,true);
 	}
 }
+
+function getMessageFromServer(chatPeople){
+	console.log(chatPeople);
+	var apiUrl = "/message/104820004";
+	var callback = function(msg){
+		console.log(msg);
+	}
+	AjaxGet(apiUrl,callback);
+}
+

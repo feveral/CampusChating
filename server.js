@@ -6,20 +6,24 @@ var chatServer = require('./server/chat_server.js');
 var KeyServer = require('./server/KeyServer.js');
 var KeyCenter = require('./server/KeyCenter.js');
 var LoginServer = require('./server/LoginServer.js');
+var MessageServer = require('./server/MessageServer.js');
 
 var app = express();
 
 var keyRouter = express.Router();
 var loginRouter = express.Router();
+var messageRouter = express.Router();
 
 var keyCenter = new KeyCenter();
 new KeyServer(keyCenter,keyRouter);
 new LoginServer(app,loginRouter);
+new MessageServer(messageRouter);
 
 // app.use(BodyParser.urlencoded({ extended: false }));
 // app.use(BodyParser.json());
 app.use('/login', loginRouter);
 app.use('/key', keyRouter);
+app.use('/message', messageRouter);
 app.use(express.static('public'));
 
 chatServer.SetKeyCenter(keyCenter);
