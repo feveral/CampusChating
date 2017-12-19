@@ -124,3 +124,20 @@ html,body{
 		margin: 0% 35%;
 		border-radius: 5px;
 	}
+
+/* quickLogin */
+
+#quickLogin{
+	margin-top: 50px;
+}
+
+	#quickLogin > div {
+		margin-bottom: 10px;
+		cursor: pointer;
+		font-size: 22px;
+	}
+
+	#quickLogin > div:hover {
+		font-size: 27px;
+		color: #8baee5;
+	}

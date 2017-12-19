@@ -22,6 +22,15 @@ module.exports = class MemberManager{
 		);
 	}
 
+	GetAllMember(callback){
+		this.db.query(
+			"SELECT * FROM MEMBER;",
+			function(err,result){
+				callback(err,result);				
+			}
+		);
+	}
+
 	GetMemberFromId(memberId,callback){
 		this.db.query(
 			"SELECT * " + 

@@ -22,7 +22,7 @@ var createMember =
 		"(Id INT NOT NULL , " +
 		"Name VARCHAR(50) CHARACTER SET utf8 NOT NULL , " +
 		"Email VARCHAR(255) , " +
-		"Password VARCHAR(50) NOT NULL , " +
+		"Password VARCHAR(50) NOT NULL " +
 	");";
 
 var createMessage = 
