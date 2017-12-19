@@ -11,4 +11,5 @@ function ClickRoom(room){
     $('#messages').empty();
     $('#room').text($(room).text());
     GetMessageFromServer($(room).text());
+    $("#messages").animate({ scrollTop: $(document).height() }, 1);
 }
