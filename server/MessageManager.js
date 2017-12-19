@@ -23,6 +23,11 @@ module.exports = class MessageManager{
 		);
 	}
 
+	GetContactPersonByMemberId(memberId,callback){
+		
+
+	}
+	
 	GetMessage(SenderId,ReceiverId,callback){
 		this.db.query(
 			"SELECT * FROM MESSAGE " +
