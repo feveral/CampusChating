@@ -14,11 +14,20 @@ module.exports = class MemberManager{
 			"VALUES ( " + 
 			"'" + attribute['Id'] +  "' , " + 
 			"'" + attribute['Name'] +  "' , " + 
-			"'" + attribute['Password'] + "' , " +  
-			"'" + attribute['Email'] + "' ); ",
+			"'" + attribute['Email'] + "' , " +  
+			"'" + attribute['Password'] + "' ); ",
 			function(err,result){
 				callback(err,result);
 			}  
+		);
+	}
+
+	GetAllMember(callback){
+		this.db.query(
+			"SELECT * FROM MEMBER;",
+			function(err,result){
+				callback(err,result);				
+			}
 		);
 	}
 

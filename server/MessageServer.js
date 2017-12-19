@@ -19,7 +19,7 @@ module.exports = class{
 			console.log(req.user);
 			var Id = path.basename(req.url);
 			console.log(Id);
-			self.messageManager.GetMessage(104820011,104820004,function(err,result){
+			self.messageManager.GetMessage(req.user,Id,function(err,result){
 				if (err)
 				{
 					console.log(err);

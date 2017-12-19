@@ -23,3 +23,25 @@ memberManager.AddMember(
 	},
 	DatabaseUtility.callback
 );
+
+
+memberManager.AddMember(
+	{
+		Id: "104820001",
+		Name:"阿瀚",
+		Email:"aa3344@gmail.com",
+		Password:"5566",
+	},
+	DatabaseUtility.callback
+);
+
+
+memberManager.AddMember(
+	{
+		Id: "104820002",
+		Name:"阿滴",
+		Email:"bb7788@gmail.com",
+		Password:"5566",
+	},
+	DatabaseUtility.callback
+);

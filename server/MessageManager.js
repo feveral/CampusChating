@@ -26,12 +26,19 @@ module.exports = class MessageManager{
 	GetMessage(SenderId,ReceiverId,callback){
 		this.db.query(
 			"SELECT * FROM MESSAGE " +
-			"WHERE SenderId =" +
+			"WHERE (SenderId = " +
 			SenderId + 
-			" AND "+ 
+			" AND " + 
 			"ReceiverId=" +  
-			ReceiverId+ " ; " ,
+			ReceiverId + " ) " +  
+			"OR" + 
+			"(SenderId =" + 
+			ReceiverId  +
+			" AND " + 
+			"ReceiverId=" +  
+			SenderId + ");",
 			function(err,result){
+				console.log(result);
 				callback(err,result);
 			}  
 		);
