@@ -25,5 +25,27 @@ module.exports = class MessageManager{
 
 	GetContactPersonByMemberId(memberId,callback){
 		
+
+	}
+	
+	GetMessage(SenderId,ReceiverId,callback){
+		this.db.query(
+			"SELECT * FROM MESSAGE " +
+			"WHERE (SenderId = " +
+			SenderId + 
+			" AND " + 
+			"ReceiverId=" +  
+			ReceiverId + " ) " +  
+			"OR" + 
+			"(SenderId =" + 
+			ReceiverId  +
+			" AND " + 
+			"ReceiverId=" +  
+			SenderId + ");",
+			function(err,result){
+				console.log(result);
+				callback(err,result);
+			}  
+		);
 	}
 }

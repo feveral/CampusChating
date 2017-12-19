@@ -13,40 +13,50 @@ function divAddIdContentElement(message) {
 function processUserInput(chatApp, socket) {
     var message = $('#send-message').val();
     var systemMessage;
-
-    if (message.charAt(0) == '/') {
-        systemMessage = chatApp.processCommand(message);
-        if (systemMessage) 
-        {
-            $('#messages').append(divSystemContentElement(systemMessage));
-        }
-    } 
-    else 
+    if(message != '')
     {
-        chatApp.sendMessage( $('#room').text(), message);
-        PrintWhatYouEnter(chatApp,message);
-        $('#messages').scrollTop($('#messages').prop('scrollHeight'));
-    }
+	    if (message.charAt(0) == '/') {
+	        systemMessage = chatApp.processCommand(message);
+	        if (systemMessage) 
+	        {
+	            $('#messages').append(divSystemContentElement(systemMessage));
+	        }
+	    } 
+	    else 
+	    {
+	        chatApp.sendMessage( $('#room').text(), message, GetDateTime());
+	        PrintWhatYouEnter(chatApp,message,ProcessSendTime(GetDateTime()));
+	        $('#messages').scrollTop($('#messages').prop('scrollHeight'));
+	    }
+	}
 
     $('#send-message').val('');
 }
 
-function PrintWhatYouEnter(chatApp,message){
+function PrintWhatYouEnter(chatApp,message,time){
     $('#messages').append('<div class="privateText">' + 
+    	'<div>'+ 
     	divEscapedContentElement(chatApp.getNickName()) + 
     	divEscapedContentElement(message) + 
-    	'</div>');
+    	'</div>' + 
+		'<div class="time">' + 
+		divEscapedContentElement(time) + 
+		'</div></div>');
 }
 
-function PrintReceiveMessage(message,lobbyPersonalMessage){
+function PrintReceiveMessage(message,time,lobbyPersonalMessage){
 	if((document.getElementById("room").textContent === message.room) || lobbyPersonalMessage)
 	{
 		var name = message.text.split(":")[0];
 		var content = message.text.split(":")[1];
-		$('#messages').append('<div class="privateText">' + 
+		$('#messages').append('<div class="privateText">' +
+		'<div>' + 
 		divEscapedContentElement(name) + 
 		divEscapedContentElement(content) + 
-		'</div>');
+		'</div>' + 
+		'<div class="time">' + 
+		divEscapedContentElement(time) + 
+		'</div></div>');
 	}
 }
 
@@ -68,3 +78,4 @@ function IsBroadcastPersonal(message){
 			PrintReceiveMessage(message,true);
 	}
 }
+

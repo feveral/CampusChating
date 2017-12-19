@@ -29,7 +29,7 @@ var createMember =
 var createMessage = 
 	"CREATE TABLE MESSAGE" + 
 		"(SenderId INT NOT NULL, " + 
-		"Message VARCHAR(255) ," + 
+		"Message VARCHAR(255) CHARACTER SET utf8 NOT NULL ," + 
 		"ReceiverId INT NOT NULL," + 
 		"Time DATETIME NOT NULL" + ");";
 

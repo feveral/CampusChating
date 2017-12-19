@@ -3,6 +3,7 @@ var passport = require('passport');
 var passportSocketIo = require('passport.socketio');
 var cookieParser = require('cookie-parser');
 var AESManager = require('./AESManager.js');
+var MessageManager = require('./MessageManager.js');
 var io;
 var guestNumber = 1;
 var nickNames = {};
@@ -11,6 +12,8 @@ var currentRoom = {};
 var keyList = [];
 
 var aesManager = new AESManager();
+var messageManager = new MessageManager();
+var DatabaseUtility = require('../database/DatabaseUtility.js');
 var keyCenter;
 
 exports.SetKeyCenter = function(kc){
@@ -115,11 +118,23 @@ function handleNameChangeAttempts(socket, nickNames, namesUsed) {
 
 function handleMessageBroadcasting(socket) {
     socket.on('BroadCastmessage', function (message) {
-
     	var userId = getKeyByValue(nickNames,message.room); 
+    	console.log("ss" + userId);
         if(message.room != "大廳" )
         {
-            message.text = keyCenter.GetAesManagerByMemberId(nickNames[socket.id]).Decrypt(message.text);
+        	console.log(keyCenter.GetAesManagerByMemberId(nickNames[socket.id]).GetKey());
+        	console.log(keyCenter.GetAesManagerByMemberId(nickNames[message.room]).GetKey());
+        	message.text = keyCenter.GetAesManagerByMemberId(nickNames[socket.id]).Decrypt(message.text);
+        	console.log(message.text);
+        	messageManager.AddMessage(
+        		{
+					SenderId: nickNames[socket.id],
+					Message: message.text,
+					ReceiverId: message.room,
+					Time: message.time
+				},
+				DatabaseUtility.callback
+			);
             io.sockets.sockets[userId].emit('message',{
             	room: nickNames[socket.id],
             	toUser: userId,
@@ -153,4 +168,6 @@ function handleClientDisconnection(socket) {
 
 function getKeyByValue(object, value) {
     return Object.keys(object).find(key => object[key] === value);
+
 }
+

@@ -3,10 +3,11 @@ var Chat = function(socket) {
     this.nick = "";
 };
 
-Chat.prototype.sendMessage = function(room, text) {
+Chat.prototype.sendMessage = function(room, text, time) {
     var message = {
         room: room,
-        text: encryptManager.AESEncrypt( text )
+        text: encryptManager.AESEncrypt(text),
+        time: time
     };
     if(room == "大廳")
         message['text'] = text;
@@ -54,3 +55,5 @@ Chat.prototype.processCommand = function(command) {
 
     return message;
 };
+
+

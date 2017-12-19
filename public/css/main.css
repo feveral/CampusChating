@@ -112,7 +112,7 @@ body{
 	overflow: auto;
 }
 	#messages div{
-		line-height: 20px;
+		line-height: 30px;
 	}
 
 #send-form{
@@ -262,13 +262,23 @@ body{
 }
 
 .privateText{
+	height:50px;
+	margin-bottom: 1.5%;
 	padding-left: 20%;
-	padding-bottom: 1.5%;
 }
-
 	.privateText div:nth-child(1){
+		float:left;
+	}
+	.privateText div:nth-child(1)>div:nth-child(1){
 		color: #3a6d99;
 	}
 
+.time{
+	float: right;
+	padding-right: 17%;
 
-
+}
+	.time>div{
+		color: grey;
+		font-size: 10px;
+	}
