@@ -10,14 +10,6 @@ function divAddIdContentElement(message) {
     return '<div onclick="ClickRoom(this)">' + message +'</div>';
 }
 
-function ClickRoom(room){
-    $("#room-list > div").css("background-color", "white");
-    $("#room-list > div").css("color", "black");
-    $(room).css("background-color","#5d8db3");
-    $(room).css("color","white");
-    $('#messages').empty();
-}
-
 function processUserInput(chatApp, socket) {
     var message = $('#send-message').val();
     var systemMessage;
