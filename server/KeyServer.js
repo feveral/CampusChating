@@ -8,7 +8,6 @@ module.exports = class{
 		this.router = router;
 		this.keyCenter = keyCenter;
 		this.rsaManager = this.keyCenter.GetRsaManager();
-		this.aesManager = new AESManager();
 		this.SetAPI();
 	}
 
@@ -22,7 +21,7 @@ module.exports = class{
 
 		self.router.post('/aesKey',function(req,res){
 			var decrypt = self.rsaManager.Decrypt(req.body.key);
-			self.keyCenter.ResetMemberAesKey( JSON.parse(decrypt) );
+			self.keyCenter.AddMemberAesManager( req.user , JSON.parse(decrypt) );
 		});
 	}
 }

@@ -1,3 +1,4 @@
+
 function addRoom(messageRoom){
 	var notRepeat = true;
 	$( "#room-list div" ).each(function( index ) {
