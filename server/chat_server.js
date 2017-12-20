@@ -131,12 +131,15 @@ function handleMessageBroadcasting(socket) {
 				},
 				function(err,result){}
 			);
-            io.sockets.sockets[userId].emit('message',{
-            	room: nickNames[socket.id],
-            	toUser: userId,
-            	text: keyCenter.GetAesManagerByMemberId(message.room).Encrypt(nickNames[socket.id]+':'+ message.text),
-            	time: message.time
-            });
+
+			if(io.sockets.sockets[userId] != undefined){
+	            io.sockets.sockets[userId].emit('message',{
+	            	room: nickNames[socket.id],
+	            	toUser: userId,
+	            	text: keyCenter.GetAesManagerByMemberId(message.room).Encrypt(nickNames[socket.id]+':'+ message.text),
+	            	time: message.time
+	            });
+        	}
         }
         else
         {

@@ -3,20 +3,27 @@ function ClickExplore(){
 	var exploreMember = new ExploreMember();
 }
 
+function ClickChat(){
+	var chatMember = new ChatMember();
+}
+
 function ClickRoom(room){
     $("#room-list > div").css("background-color", "white");
     $("#room-list > div").css("color", "black");
     $(room).css("background-color","#5d8db3");
     $(room).css("color","white");
     $('#messages').empty();
-    $('#room').text($(room).children().first().text());
-    var Id = $(room).children().first().next().text();
-    addIdOnTitle(Id);
+    var Name = $(room).find("div:nth(1)").text();
+    console.log(Name);
+    $('#room').text(Name);
+    var Id = $(room).find("div:nth(2)").text();
+    console.log(Id);
+    $('#roomId').text(Id);
     GetMessageFromServer(Id);
     $("#messages").animate({ scrollTop: 3000 }, 1);
 }
 
-function addIdOnTitle(Id){
-	$('#room').append(divEscapedContentElement(Id));
-}
+
+
+
 

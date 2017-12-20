@@ -1,25 +1,28 @@
-class ExploreMember{
+class ChatMember{
 
 	constructor(){
-		this.GetData(this.MemberToExplore);
+		this.GetData(this.MemberToChat);
 	}
 
 	GetData(callback){
-		var apiUrl = "/member";
+		var apiUrl = "/contact";
 		AjaxGet(apiUrl,callback);
 	}
 
-	MemberToExplore(msg){
+	MemberToChat(msg){
 		var data = (JSON.parse(msg))['data'];
 		$('#room-list').empty();
 		for(var i = 0 ; i < data.length ; i++){
 			$('#room-list').append('<div onclick="ClickRoom(this)">' +
 									'<div>' + 
 									divEscapedContentElement(data[i]['Name']) + 
-									divEscapedContentElement(data[i]['Id']) +
+									divEscapedContentElement(data[i]['ContactId']) +
+									divEscapedContentElement(ProcessReceiveTime(data[i]['Time'])) +
+									'</div>' + 
+									'<div class="NewestMessage">' + 
+									divEscapedContentElement(data[i]['LastMessage']) +
 									'</div>' + 
 									'</div>');
-			$('#room-list>div').css("line-height","55px");
 		}
 	}
 }

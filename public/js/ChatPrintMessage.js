@@ -15,22 +15,12 @@ function processUserInput(chatApp, socket) {
     var systemMessage;
     if(message != '')
     {
-	    if (message.charAt(0) == '/') {
-	        systemMessage = chatApp.processCommand(message);
-	        if (systemMessage) 
-	        {
-	            $('#messages').append(divSystemContentElement(systemMessage));
-	        }
-	    } 
-	    else 
-	    {
-	    	if($('#room').text() == "大廳")
-	    		chatApp.sendMessage("大廳", message, GetDateTime());
-	    	else
-	        	chatApp.sendMessage( $('#room>div').text(), message, GetDateTime());
-	        PrintWhatYouEnter(chatApp,message,ProcessSendTime(GetDateTime()));
-	        $('#messages').scrollTop($('#messages').prop('scrollHeight'));
-	    }
+    	if($('#room').text() == "大廳")
+    		chatApp.sendMessage("大廳", message, GetDateTime());
+    	else
+        	chatApp.sendMessage( $('#roomId').text(), message, GetDateTime());
+        PrintWhatYouEnter(chatApp,message,ProcessSendTime(GetDateTime()));
+        $('#messages').scrollTop($('#messages').prop('scrollHeight'));
 	}
 
     $('#send-message').val('');

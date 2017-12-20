@@ -15,9 +15,11 @@ function GetDateTime() {
 }
 
 function GetMessageFromServer(chatPeople){
+	console.log(chatPeople);
 	var apiUrl = "/message/" + chatPeople;
 	var callback = function(msg){
 		var object = JSON.parse(msg);
+		console.log(message);
 		var message = object['data'];
 		for(var Count in message){
 			message[Count]['text'] = message[Count]['SenderId'] + ":" + message[Count]['Message'];

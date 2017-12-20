@@ -49,7 +49,7 @@ $(document).ready(function() {
     		room = room.substring(1, room.length);
     		if (room != '') 
     		{
-    			$('#room-list').append(divAddIdContentElement(room));
+    			//$('#room-list').append(divAddIdContentElement(room));
     		}
     	}
 
