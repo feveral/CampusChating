@@ -38,7 +38,8 @@ module.exports = class{
 			"SELECT Name,ContactId,LastMessage,Time " + 
 			"FROM CONTACT,MEMBER " + 
 			"WHERE MemberId=" + memberId + " AND " + 
-			"Id=ContactId;",
+			"Id=ContactId " + 
+			"ORDER BY Time DESC;",
 			function(err,result){
 				callback(err,result);
 			} 
