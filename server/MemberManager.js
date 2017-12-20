@@ -1,11 +1,13 @@
 'use strict';
 
-const DatabaseUtility = require('../database/DatabaseUtility.js')
+const DatabaseUtility = require('../database/DatabaseUtility.js');
+const ContactManager = require('./ContactManager.js');
 
 module.exports = class MemberManager{
 
 	constructor(){
 		this.db = DatabaseUtility.Getdb();
+		this.ContactManager = new ContactManager();
 	}
 
 	AddMember(attribute,callback){
