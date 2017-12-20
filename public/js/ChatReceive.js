@@ -36,8 +36,6 @@ $(document).ready(function() {
 	socket.on('message', function (message) {
 		message.text = encryptManager.AESDecrypt(message.text);
     	addRoom(message.room);
-    	console.log(message.text);
-    	console.log(message.time);
     	PrintReceiveMessage(message,ProcessSendTime(message.time),false);
 	});
 
