@@ -10,8 +10,9 @@ function ClickRoom(room){
     $(room).css("color","white");
     $('#messages').empty();
     $('#room').text($(room).children().first().text());
-    addIdOnTitle($(room).children().next().text());
-    GetMessageFromServer($(room).children().next().text());
+    var Id = $(room).children().first().next().text();
+    addIdOnTitle(Id);
+    GetMessageFromServer(Id);
     $("#messages").animate({ scrollTop: 3000 }, 1);
 }
 

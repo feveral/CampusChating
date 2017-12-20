@@ -16,6 +16,7 @@ class ExploreMember{
 			$('#room-list').append('<div onclick="ClickRoom(this)">' + 
 									divEscapedContentElement(data[i]['Name']) + 
 									divEscapedContentElement(data[i]['Id']) +
+									divEscapedContentElement("7:24 PM") +
 									'</div>');
 		}
 	}
