@@ -52,18 +52,11 @@ module.exports = class MessageManager{
 
 	GetMessage(SenderId,ReceiverId,callback){
 		this.db.query(
-			"SELECT * FROM MESSAGE " +
-			"WHERE (SenderId = " +
-			SenderId + 
-			" AND " + 
-			"ReceiverId=" +  
-			ReceiverId + " ) " +  
+			"SELECT Name,SenderId,Message,ReceiverId,Time FROM MESSAGE,MEMBER " +
+			"WHERE ((SenderId = " + SenderId + " AND " + "ReceiverId=" +  ReceiverId + " ) " +  
 			"OR" + 
-			"(SenderId =" + 
-			ReceiverId  +
-			" AND " + 
-			"ReceiverId=" +  
-			SenderId + ");",
+			"(SenderId =" + ReceiverId  + " AND " + "ReceiverId=" + SenderId + "))" + 
+			" AND SenderId=Id ",
 			function(err,result){
 				callback(err,result);
 			}  

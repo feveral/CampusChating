@@ -27,33 +27,82 @@ function processUserInput(chatApp, socket) {
 }
 
 function PrintWhatYouEnter(chatApp,message,time){
-    $('#messages').append('<div class="privateText">' + 
-    	'<div>'+ 
-    	divEscapedContentElement(chatApp.getNickName()) + 
-    	divEscapedContentElement(message) + 
-    	'</div>' + 
-		'<div class="time">' + 
-		divEscapedContentElement(time) + 
-		'</div></div>');
+
+
+	AjaxGet('/member/' + chatApp.getNickName() , function(msg){
+		var data = (JSON.parse(msg)['data']);
+		var name = data['Name'];
+		if($('#messages > div:last-child > div > div:nth-child(2)').text() === chatApp.getNickName())
+		{
+			$('#messages > div:last-child').append('<div>' + message + '</div>');
+			return;
+		}
+
+	    $('#messages').append(
+	    	'<div id="privateText">' + 
+	    		'<div>' + 
+			    	'<div>' + name + '</div>' + 
+			    	'<div>' + chatApp.getNickName() + '</div>' + 
+			    	'<div>' + time + '</div>' + 
+			    '</div>' + 
+		    	'<div>' + message + '</div>' + 	
+			'</div>'
+		);
+	});
 }
 
-function PrintReceiveMessage(message,time,lobbyPersonalMessage){
+function PrintSavedMessage(message,time,lobbyPersonalMessage,name){
 	var roomTitle = GetTitleString();
-	console.log("aaa" + roomTitle);
 	if((roomTitle === message.room) || lobbyPersonalMessage)
 	{
-		console.log("ccc");
-		var name = message.text.split(":")[0];
+		var id = message.text.split(":")[0];
 		var content = message.text.split(":")[1];
-		$('#messages').append('<div class="privateText">' +
-		'<div>' + 
-		divEscapedContentElement(name) + 
-		divEscapedContentElement(content) + 
-		'</div>' + 
-		'<div class="time">' + 
-		divEscapedContentElement(time) + 
-		'</div></div>');
+		if($('#messages > div:last-child > div > div:nth-child(2)').text() === id)
+		{
+			$('#messages > div:last-child').append('<div>' + content + '</div>');
+			return;
+		}
+	    $('#messages').append(
+	    	'<div id="privateText">' + 
+	    		'<div>' + 
+			    	'<div>' + name + '</div>' + 
+			    	'<div>' + id + '</div>' + 
+			    	'<div>' + time + '</div>' + 
+			    '</div>' + 
+		    	'<div>' + content + '</div>' + 	
+			'</div>'
+		);
 		$("#messages").animate({ scrollTop: 3000 }, 1);
+	}
+}
+
+function PrintReceiveMessage(message,time,lobbyPersonalMessage,name){
+	var roomTitle = GetTitleString();
+	if((roomTitle === message.room) || lobbyPersonalMessage)
+	{
+		var id = message.text.split(":")[0];
+		var content = message.text.split(":")[1];
+
+		AjaxGet('/member/' + id , function(msg){
+			var data = (JSON.parse(msg)['data']);
+			var name = data['Name'];
+			if($('#messages > div:last-child > div > div:nth-child(2)').text() === id)
+			{
+				$('#messages > div:last-child').append('<div>' + content + '</div>');
+				return;
+			}
+		    $('#messages').append(
+		    	'<div id="privateText">' + 
+		    		'<div>' + 
+				    	'<div>' + name + '</div>' + 
+				    	'<div>' + id + '</div>' + 
+				    	'<div>' + time + '</div>' + 
+				    '</div>' + 
+			    	'<div>' + content + '</div>' + 	
+				'</div>'
+			);
+			$("#messages").animate({ scrollTop: 3000 }, 1);
+		});
 	}
 }
 
@@ -66,9 +115,7 @@ function GetTitleString()
 		   	if(divs[i] == x)
 		   {
 		     var previous = divs[i - 1];
-		     console.log(previous);
 		     var next = divs[i + 1];
-		     console.log(next.textContent);
 		   }
 	}
 	return next.textContent;

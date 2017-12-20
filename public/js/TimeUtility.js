@@ -21,9 +21,10 @@ function GetMessageFromServer(chatPeople){
 		var object = JSON.parse(msg);
 		console.log(message);
 		var message = object['data'];
-		for(var Count in message){
+		for(var Count in message)
+		{
 			message[Count]['text'] = message[Count]['SenderId'] + ":" + message[Count]['Message'];
-			PrintReceiveMessage(message[Count],ProcessReceiveTime(message[Count]['Time']),true);
+			PrintSavedMessage(message[Count],ProcessReceiveTime(message[Count]['Time']),true,message[Count]['Name']);
 		}
 	}
 	AjaxGet(apiUrl,callback);
@@ -67,7 +68,6 @@ function IsOverDay(hour){
 }
 
 function IsPm(hour){
-	console.log(hour);
 	var boolPm = false;
 	if(hour >= 13 && hour <= 24)
 		boolPm = true;

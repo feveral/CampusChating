@@ -1,5 +1,7 @@
 'use strict';
 var MemberManager = require('./MemberManager.js');
+const path = require('path');
+const url = require('url');
 
 module.exports = class{
 
@@ -18,5 +20,11 @@ module.exports = class{
 			}); 
 		});
 
+		self.router.get('/:Id',function(req,res){
+			var Id = path.basename(req.url);
+			self.memberManager.GetMemberFromId(Id,function(err,result){
+				res.end(JSON.stringify({success:true , data:result}));
+			}); 
+		});
 	}
 }
