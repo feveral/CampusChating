@@ -134,14 +134,16 @@ function handleMessageBroadcasting(socket) {
             io.sockets.sockets[userId].emit('message',{
             	room: nickNames[socket.id],
             	toUser: userId,
-            	text: keyCenter.GetAesManagerByMemberId(message.room).Encrypt(nickNames[socket.id]+':'+ message.text)
+            	text: keyCenter.GetAesManagerByMemberId(message.room).Encrypt(nickNames[socket.id]+':'+ message.text),
+            	time: message.time
             });
         }
         else
         {
             socket.broadcast.to(message.room).emit('BroadCastmessage', {
             	system: false,
-                text: (nickNames[socket.id] + ': ' + message.text)
+                text: (nickNames[socket.id] + ': ' + message.text),
+                time: message.time
             });
         }
     });

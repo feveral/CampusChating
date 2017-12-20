@@ -13,11 +13,10 @@ class ExploreMember{
 		var data = (JSON.parse(msg))['data'];
 		$('#room-list').empty();
 		for(var i = 0 ; i < data.length ; i++){
-			$('#room-list').append(RoomHtml(data[i]['Id']));
+			$('#room-list').append('<div onclick="ClickRoom(this)">' + 
+									divEscapedContentElement(data[i]['Name']) + 
+									divEscapedContentElement(data[i]['Id']) +
+									'</div>');
 		}
 	}
-}
-
-function RoomHtml(data){
-	return '<div onclick="ClickRoom(this)">' + data + '</div>';
 }

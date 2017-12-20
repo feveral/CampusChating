@@ -28,6 +28,7 @@ $(document).ready(function() {
 
 	socket.on('BroadCastmessage', function (message) {
 		message.text = message.text;
+		console.log(message.text);
 		IsBroadcastPersonal(message);
     	showWindows(message.text);
     });
@@ -35,7 +36,9 @@ $(document).ready(function() {
 	socket.on('message', function (message) {
 		message.text = encryptManager.AESDecrypt(message.text);
     	addRoom(message.room);
-    	PrintReceiveMessage(message);
+    	console.log(message.text);
+    	console.log(message.time);
+    	PrintReceiveMessage(message,ProcessSendTime(message.time),false);
 	});
 
     $('#send-message').focus();
