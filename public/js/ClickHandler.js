@@ -14,10 +14,8 @@ function ClickRoom(room){
     $(room).css("color","white");
     $('#messages').empty();
     var Name = $(room).find("div:nth(1)").text();
-    console.log(Name);
     $('#room').text(Name);
     var Id = $(room).find("div:nth(2)").text();
-    console.log(Id);
     $('#roomId').text(Id);
     GetMessageFromServer(Id);
     $("#messages").animate({ scrollTop: 3000 }, 1);
