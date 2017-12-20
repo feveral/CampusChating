@@ -37,7 +37,8 @@ module.exports = class{
 		this.db.query(
 			"SELECT Name,ContactId,LastMessage,Time " + 
 			"FROM CONTACT,MEMBER " + 
-			"WHERE MemberId=" + memberId + ";",
+			"WHERE MemberId=" + memberId + " AND " + 
+			"Id=ContactId;",
 			function(err,result){
 				callback(err,result);
 			} 
