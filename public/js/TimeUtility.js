@@ -15,7 +15,6 @@ function GetDateTime() {
 }
 
 function GetMessageFromServer(chatPeople){
-	console.log(chatPeople);
 	var apiUrl = "/message/" + chatPeople;
 	var callback = function(msg){
 		var object = JSON.parse(msg);

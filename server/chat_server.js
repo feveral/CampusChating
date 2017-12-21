@@ -132,7 +132,7 @@ function handleMessageBroadcasting(socket) {
 				function(err,result){}
 			);
 
-			if(io.sockets.sockets[userId] != undefined){
+			if(io.sockets.sockets[userId] != undefined && nickNames[socket.id] != message.room){
 	            io.sockets.sockets[userId].emit('message',{
 	            	room: nickNames[socket.id],
 	            	toUser: userId,
