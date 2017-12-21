@@ -1,12 +1,16 @@
 'use strict';
 
 const ContactManager = require('./ContactManager.js');
+const MessageManager = require('./MessageManager.js');
+const DatabaseUtility = require('../database/DatabaseUtility.js')
 
 module.exports = class{
 
 	constructor(router){
 		this.router = router;
 		this.contactManager = new ContactManager();
+		this.messageManager = new MessageManager();
+		this.db = DatabaseUtility.Getdb();
 		this.SetAPI();
 	}
 
@@ -28,6 +32,5 @@ module.exports = class{
 				}
 			});
 		});
-
 	}
 }

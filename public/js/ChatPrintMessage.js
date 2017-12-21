@@ -122,13 +122,10 @@ function GetTitleString()
 }
 
 function PrintBroadcastMessage(message){
-	console.log(document.getElementById("room").textContent);
 	if(document.getElementById("room").textContent === "大廳")
 	{	
-		console.log("checkit");
 		var newElement = $('<div class="public"></div>').text(message);
 		$('#messages').append(newElement);
-		console.log("checkit");
 	}
 }
 
@@ -136,7 +133,6 @@ function PrintBroadcastMessage(message){
 function IsBroadcastPersonal(message){
 	if(document.getElementById("room").textContent === "大廳")
 	{
-		console.log("kk"+ message.time);
 		if(message.system)
 			PrintBroadcastMessage(message.text);
 		else
