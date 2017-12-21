@@ -37,7 +37,7 @@ function ChangeName(){
 		}
 		chatApp.processCommand('/nick ' + object['data']['Id']);
 		encryptManager.Initial();
-		$('#header > div:nth-child(3)').text("Hi! " + object['data']['Name']);	
+		$('#header > div:nth-child(4)').text("Hi! " + object['data']['Name']);	
 	}
 	AjaxGet(apiUrl,callback);
 }

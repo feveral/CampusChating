@@ -22,9 +22,9 @@ var contactRouter = express.Router();
 var keyCenter = new KeyCenter();
 new KeyServer(keyCenter,keyRouter);
 new LoginServer(app,loginRouter);
-new MessageServer(messageRouter);
-new MemberServer(memberRouter);
-new ContactServer(contactRouter);
+new MessageServer(messageRouter,keyCenter);
+new MemberServer(memberRouter,keyCenter);
+new ContactServer(contactRouter,keyCenter);
 
 // app.use(BodyParser.urlencoded({ extended: false }));
 // app.use(BodyParser.json());

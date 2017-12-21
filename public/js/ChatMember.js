@@ -10,17 +10,18 @@ class ChatMember{
 	}
 
 	MemberToChat(msg){
-		var data = (JSON.parse(msg))['data'];
+		var data = (JSON.parse(msg));
+		var message = JSON.parse(encryptManager.AESDecrypt(data['data']));
 		$('#room-list').empty();
-		for(var i = 0 ; i < data.length ; i++){
+		for(var i = 0 ; i < message.length ; i++){
 			$('#room-list').append('<div onclick="ClickRoom(this)">' +
 									'<div>' + 
-									divEscapedContentElement(data[i]['Name']) + 
-									divEscapedContentElement(data[i]['ContactId']) +
-									divEscapedContentElement(ProcessReceiveTime(data[i]['Time'])) +
+									divEscapedContentElement(message[i]['Name']) + 
+									divEscapedContentElement(message[i]['ContactId']) +
+									divEscapedContentElement(ProcessReceiveTime(message[i]['Time'])) +
 									'</div>' + 
 									'<div class="NewestMessage">' + 
-									divEscapedContentElement(data[i]['LastMessage']) +
+									divEscapedContentElement(message[i]['LastMessage']) +
 									'</div>' + 
 									'</div>');
 		}

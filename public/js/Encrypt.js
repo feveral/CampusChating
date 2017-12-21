@@ -33,7 +33,9 @@ class EncryptManager{
 			{
 				key : crypt.encrypt(JSON.stringify(self.aesKey))
 			}
-			AjaxPost("/key/aesKey",data,function(msg){});
+			AjaxPost("/key/aesKey",data,function(msg){
+			    var chatMember = new ChatMember();
+			});
 		});
 	}
 
