@@ -22,6 +22,7 @@ module.exports = class{
 		self.router.post('/aesKey',function(req,res){
 			var decrypt = self.rsaManager.Decrypt(req.body.key);
 			self.keyCenter.AddMemberAesManager( req.user , JSON.parse(decrypt) );
+			res.end(JSON.stringify({success:true}));
 		});
 	}
 }
