@@ -1,0 +1,336 @@
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+
+	font-family: 'Microsoft JhengHei', MingLiU, Arial;
+}
+
+*, *:before, *:after {
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+html{
+	height:100%;
+}
+body{
+	position: relative;
+	display: inline-block;
+	width: 100%;
+	min-height: 100%;
+	margin: 0;
+	padding: 0;
+	color: black;
+	text-align: center;
+	font-size: medium;
+	background-color: #efefef;
+}
+
+#content{
+	display: inline-block;
+	width: 70%;
+	height: 95vh;
+	background-color: white;
+	margin-top: 0px;
+	overflow: hidden; 
+	box-shadow: 0px 1px 8px rgba(200,200,200,1.5);
+	font-size: 15px;
+	font-family: Tahoma,sans-serif,Arial,Helvetica;
+}
+
+#header{
+	display: block;
+	background-color: #5682a3;
+	color: white;
+	height: 5vh;
+	line-height: 5vh;
+	overflow: hidden;
+}
+
+	#header > div:nth-child(1){
+		float: left;
+		display: inline-block;
+		width: 29%;
+		text-align: center;
+		border-bottom: : 1px solid rgba(255,0,0,.3);
+		font-size: 20px;
+	}
+
+	#header > div:nth-child(2){
+		display: inline-block;
+		width: 10%;
+		text-align: left;
+		padding-left: 2%;
+		color: white;
+		font-size: 18px;
+	}
+
+	#header > div:nth-child(3){
+		display: inline-block;
+		width: 40%;
+		text-align: left;
+		color: #5682a3;
+		font-size: 10px;
+	}
+
+	#header > div:nth-child(4) , #header > div:nth-child(5){
+		display: inline-block;
+		width: 7%;
+		cursor: pointer;
+	}
+
+	#header > div:nth-child(4):hover , #header > div:nth-child(5):hover{
+		background-color: #3a6d99;
+	}
+
+
+#member{
+	display: inline-block;
+	width: 30%;
+}
+
+#roomSum{
+	position: relative;	
+	float: left;
+	display: inline-block;
+	width: 29.5%;
+	height:90vh;
+	line-height: 50px;
+	text-align: left;
+	font-weight:bold;
+	border-right: 2px solid #dee5ef;
+	border-bottom: 2px solid #dee5ef;
+	text-align: center;
+	overflow: hidden;
+}
+
+#messagesRoom{
+	position: relative;
+	display: inline-block;
+	width: 70%;
+	height: 90vh;
+	line-height: 50px;
+	text-align: left;
+	border-bottom: 2px solid #dee5ef;
+	overflow: auto;
+}
+
+#messages{
+	margin-top:4%;
+	height: 100%;
+	max-height: 75vh;
+	overflow: auto;
+}
+	#messages div{
+		line-height: 30px;
+	}
+
+#send-form{
+	width: 100%;
+	height: 7.5vh;
+	padding-bottom: 0.5vh;
+	position: absolute;
+	bottom:0;
+	text-align: center;
+}
+
+	#send-form>input:nth-child(2){
+		color: rgb(17, 138, 214);
+		font-weight:bold;
+		width:12%;
+	}
+
+	#send-form input[type=text]{
+		width:50%;
+		height:3vh;
+		border: 2px solid white;
+		padding-top: 0px;
+		border-bottom: 1px solid #e2e2e2;
+		transition: border-bottom 0.5s;
+	}
+
+	#send-form input[type=text]:focus{
+		padding: 0px;
+		border-top: 0px;
+		outline-color: white;
+		border-bottom: 2px solid #3a6d99;
+	}
+
+	#send-form input[type=submit]{
+		background-color: white;
+		outline-color: white;
+		letter-spacing: 0.1em;
+		border: 0px;
+		cursor: pointer;
+	}
+
+	#send-form input[type=submit]:hover{
+		color: #3a6d99;
+	}
+
+#room-list {
+	height:77vh;
+	overflow: auto;
+}
+	#room-list>div{
+		height: 55px;
+		line-height: 27.5px;
+	}
+		#room-list>div>div:nth-child(2)>div{
+			width:100%;
+			text-align: left;
+			padding-left:20%;
+			color:#babcc1;
+			font-size: 12px;
+		}
+
+		#room-list>div>div:nth-child(1)>div{
+			display: inline-block;
+		}
+
+
+		#room-list>div>div:nth-child(1)>div:nth-child(1){
+			float: left;
+			padding-left:20%;
+			text-align: center;
+			font-size: 12px;
+		}
+
+		#room-list>div>div:nth-child(1)>div:nth-child(2){
+			padding-left: 8%;
+			color:white;
+			font-size: 10px;
+		}
+
+		#room-list>div>div:nth-child(1)>div:nth-child(3){
+			color:grey;
+			float:right;
+			font-size: 10px;
+			padding-right: 5%;
+		}
+
+	#room-list>div:hover{
+		cursor: pointer;
+		background-color: rgb(206, 220, 229);
+	}
+
+#functionButton {
+	vertical-align: bottom;
+	height: 9vh;
+}
+	#functionButton > div{
+		cursor: pointer;
+	}
+
+	#functionButton > div:hover{
+		background-color: rgb(206, 220, 229);
+	}
+	
+	#functionButton > div:first-child {
+		display: inline-block;
+		width: 50%;
+		border-top: 2px solid #afafaf;
+		border-right: 1px solid #afafaf;
+		border-bottom: 1px solid #afafaf;
+	}
+	
+	#functionButton > div:last-child {
+		display: inline-block;
+		width: 50%;
+		border-top: 2px solid #afafaf;
+		border-bottom: 1px solid #afafaf;
+		border-left: 1px solid #afafaf;
+	}
+
+#add-room{
+	margin-top: 12px;
+	margin-bottom: 12px;
+	outline-color: white;
+	border: 0;
+	font-size: 15px;
+	height: 4vh;
+	padding-left: 30px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	background-color: #f4f4f4;
+	border-radius: 1px;
+	width: 90%;
+}
+
+#add-room:focus{
+	background-color:white;
+	border: 1px #b5b5b5 solid;
+}
+
+.pop{
+	height: 0%;
+    width: 70%;
+    margin-left: 15%;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0, 0.9);
+    overflow-y: hidden;
+    overflow: hidden;
+    transition: 0.5s;
+}
+
+.overlay-content {
+    position: relative;
+    top: 0%;
+    width: 100%;
+	padding-left: 0%;
+    border-radius: 8px;
+    text-align: center;
+    margin-top: 0px;
+}
+
+.overlay-content a {
+    padding: 1px;
+    text-decoration: none;
+    font-size: 12px;
+    color: #ffffff;
+    display: block;
+    transition: 0.3s;
+}
+
+.public {
+	color: grey;
+	text-align: center;
+	font-size: 14px;
+	padding-bottom: 1%;
+}
+
+#privateText{
+	display: block;
+	margin-bottom: 1.5%;
+	padding-left: 20%;
+}
+
+	#privateText > div{
+		display: block;
+	}
+
+		#privateText > div > *{
+			display: inline-block;
+		}
+
+		#privateText > div > div:first-child{
+			display: inline-block;
+			margin-right: 20px;
+			color: #6ba3ff;
+		}
+
+		#privateText > div > div:nth-child(2){
+			display: inline-block;
+			color: #e8e8e8;
+		}
+
+		#privateText > div > div:nth-child(3){
+			display: inline-block;
+			color: grey;
+			float: right;
+			padding-right: 20%;
+			font-size: 10px;
+		}

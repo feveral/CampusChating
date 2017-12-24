@@ -10,13 +10,16 @@ class ExploreMember{
 	}
 
 	MemberToExplore(msg){
-		var data = (JSON.parse(msg))['data'];
+		var data = (JSON.parse(msg));
+		console.log(data);
+		var message = JSON.parse(encryptManager.AESDecrypt(data['data']));
+		console.log(message);
 		$('#room-list').empty();
-		for(var i = 0 ; i < data.length ; i++){
+		for(var i = 0 ; i < message.length ; i++){
 			$('#room-list').append('<div onclick="ClickRoom(this)">' +
 									'<div>' + 
-									divEscapedContentElement(data[i]['Name']) + 
-									divEscapedContentElement(data[i]['Id']) +
+									divEscapedContentElement(message[i]['Name']) + 
+									divEscapedContentElement(message[i]['Id']) +
 									'</div>' + 
 									'</div>');
 			$('#room-list>div').css("line-height","55px");

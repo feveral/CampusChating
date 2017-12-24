@@ -136,7 +136,7 @@ function handleMessageBroadcasting(socket) {
 				function(err,result){}
 			);
 
-			if(io.sockets.sockets[userId] != undefined){
+			if(io.sockets.sockets[userId] != undefined && nickNames[socket.id] != message.room){
                 console.log('以下是要傳給' + message.room + '之未加密訊息 :');
                 console.log(nickNames[socket.id]+':'+ message.text);
                 console.log('以下是要傳給' + message.room + '之已加密訊息 : ');

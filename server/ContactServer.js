@@ -6,9 +6,10 @@ const DatabaseUtility = require('../database/DatabaseUtility.js')
 
 module.exports = class{
 
-	constructor(router){
+	constructor(router,keyCenter){
 		this.router = router;
 		this.contactManager = new ContactManager();
+		this.keyCenter = keyCenter;
 		this.messageManager = new MessageManager();
 		this.db = DatabaseUtility.Getdb();
 		this.SetAPI();
@@ -28,7 +29,9 @@ module.exports = class{
 				}
 				else
 				{
-					res.end(JSON.stringify({success:true,data:result}));
+					var resultMessage = JSON.stringify(result);
+					var encryptMessage = self.keyCenter.GetAesManagerByMemberId(req.user).Encrypt(resultMessage); 
+					res.end(JSON.stringify({success:true , data:self.keyCenter.GetAesManagerByMemberId(req.user).Encrypt(resultMessage)}));
 				}
 			});
 		});

@@ -18,7 +18,7 @@ function GetMessageFromServer(chatPeople){
 	var apiUrl = "/message/" + chatPeople;
 	var callback = function(msg){
 		var object = JSON.parse(msg);
-		var message = object['data'];
+		var message = JSON.parse(encryptManager.AESDecrypt(object['data']));
 		for(var Count in message)
 		{
 			message[Count]['text'] = message[Count]['SenderId'] + ":" + message[Count]['Message'];
@@ -30,6 +30,7 @@ function GetMessageFromServer(chatPeople){
 
 function ProcessReceiveTime(wholeTime){
 	var pmOram = "AM";
+	console.log(wholeTime);
 	var noDate = wholeTime.split("T")[1];
 	var hour = IsOverDay(parseInt(noDate.split(":")[0]) + 8);
 	var minute = noDate.split(":")[1];
