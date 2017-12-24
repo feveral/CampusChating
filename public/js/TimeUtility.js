@@ -30,7 +30,6 @@ function GetMessageFromServer(chatPeople){
 
 function ProcessReceiveTime(wholeTime){
 	var pmOram = "AM";
-	console.log(wholeTime);
 	var noDate = wholeTime.split("T")[1];
 	var hour = IsOverDay(parseInt(noDate.split(":")[0]) + 8);
 	var minute = noDate.split(":")[1];

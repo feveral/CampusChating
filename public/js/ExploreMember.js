@@ -11,9 +11,7 @@ class ExploreMember{
 
 	MemberToExplore(msg){
 		var data = (JSON.parse(msg));
-		console.log(data);
 		var message = JSON.parse(encryptManager.AESDecrypt(data['data']));
-		console.log(message);
 		$('#room-list').empty();
 		for(var i = 0 ; i < message.length ; i++){
 			$('#room-list').append('<div onclick="ClickRoom(this)">' +
