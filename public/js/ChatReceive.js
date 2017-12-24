@@ -34,7 +34,10 @@ $(document).ready(function() {
     });
 
 	socket.on('message', function (message) {
+		ClickChat();
+		console.log('以下是已接收未解密之訊息 ： \n' + message.text);
 		message.text = encryptManager.AESDecrypt(message.text);
+		console.log('以下是已接收已解密之訊息 ： \n' + message.text);
     	addRoom(message.room);
     	PrintReceiveMessage(message,ProcessSendTime(message.time),false);
 	});

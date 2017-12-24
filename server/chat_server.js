@@ -51,10 +51,10 @@ function joinRoom(socket, room) {
     socket.join(room);
     currentRoom[socket.id] = room;
     socket.emit('joinResult', {room: room});
-    socket.broadcast.to(room).emit('BroadCastmessage', {
-    	system: true,
-        text:  ( nickNames[socket.id] + ' has joined ' + room + '.' )
-    });
+    // socket.broadcast.to(room).emit('BroadCastmessage', {
+    // 	system: true,
+    //     text:  ( nickNames[socket.id] + ' has joined ' + room + '.' )
+    // });
 
     var usersInRoom = io.sockets.clients(room);
     if (usersInRoom.length > 1) {
@@ -72,10 +72,10 @@ function joinRoom(socket, room) {
             }
         }
         usersInRoomSummary += '.';
-        socket.emit('BroadCastmessage', {
-        	system: true,
-        	text: usersInRoomSummary
-        });
+        // socket.emit('BroadCastmessage', {
+        // 	system: true,
+        // 	text: usersInRoomSummary
+        // });
     }
 }
 
@@ -100,16 +100,16 @@ function handleNameChangeAttempts(socket, nickNames, namesUsed) {
                     success: true,
                     name: name
                 });
-                socket.broadcast.to(currentRoom[socket.id]).emit('BroadCastmessage', {
-                	system: true,
-                    text: (previousName + ' is now known as ' + name + '.')
-                });
+                // socket.broadcast.to(currentRoom[socket.id]).emit('BroadCastmessage', {
+                // 	system: true,
+                //     text: (previousName + ' is now known as ' + name + '.')
+                // });
             } 
             else 
             {
                 socket.emit('nameResult', {
-                success: false,
-                message: keyCenter.GetAesManagerByMemberId(nickNames[socket.id]).Encrypt('That name is already in use.')
+                    success: false,
+                    message: keyCenter.GetAesManagerByMemberId(nickNames[socket.id]).Encrypt('That name is already in use.')
                 });
             }
         }
@@ -121,8 +121,12 @@ function handleMessageBroadcasting(socket) {
     	var userId = getKeyByValue(nickNames,message.room); 
         if(message.room != "大廳" )
         {
-        	message.text = keyCenter.GetAesManagerByMemberId(nickNames[socket.id]).Decrypt(message.text);
-        	messageManager.AddMessage(
+            console.log('以下是來自' + nickNames[socket.id] + '之未解密訊息 :');
+        	console.log(message.text);
+            message.text = keyCenter.GetAesManagerByMemberId(nickNames[socket.id]).Decrypt(message.text);
+            console.log('以下是來自' + nickNames[socket.id] + '之已解密訊息 :');
+            console.log(message.text + '\n');
+            messageManager.AddMessage(
         		{
 					SenderId: nickNames[socket.id],
 					Message: message.text,
@@ -133,6 +137,10 @@ function handleMessageBroadcasting(socket) {
 			);
 
 			if(io.sockets.sockets[userId] != undefined && nickNames[socket.id] != message.room){
+                console.log('以下是要傳給' + message.room + '之未加密訊息 :');
+                console.log(nickNames[socket.id]+':'+ message.text);
+                console.log('以下是要傳給' + message.room + '之已加密訊息 : ');
+                console.log(keyCenter.GetAesManagerByMemberId(message.room).Encrypt(nickNames[socket.id]+':'+ message.text) + "\n");
 	            io.sockets.sockets[userId].emit('message',{
 	            	room: nickNames[socket.id],
 	            	toUser: userId,

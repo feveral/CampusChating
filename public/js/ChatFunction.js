@@ -4,6 +4,8 @@ var Chat = function(socket) {
 };
 
 Chat.prototype.sendMessage = function(room, text, time) {
+    console.log('以下是未加密將送出之訊息 : \n' + text);
+    console.log('以下是已加密將送出之訊息 : \n' + encryptManager.AESEncrypt(text));
     var message = {
         room: room,
         text: encryptManager.AESEncrypt(text),

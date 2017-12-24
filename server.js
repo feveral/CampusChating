@@ -1,7 +1,6 @@
 var http = require('http');
 var express = require('express');
 var socketio = require('socket.io');
-var BodyParser = require('body-parser');
 var chatServer = require('./server/chat_server.js');
 var KeyServer = require('./server/KeyServer.js');
 var KeyCenter = require('./server/KeyCenter.js');
@@ -26,8 +25,6 @@ new MessageServer(messageRouter,keyCenter);
 new MemberServer(memberRouter,keyCenter);
 new ContactServer(contactRouter,keyCenter);
 
-// app.use(BodyParser.urlencoded({ extended: false }));
-// app.use(BodyParser.json());
 app.use('/login', loginRouter);
 app.use('/member', memberRouter);
 app.use('/key', keyRouter);

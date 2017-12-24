@@ -17,7 +17,7 @@ memberManager.AddMember(
 memberManager.AddMember(
 	{
 		Id: "104820011",
-		Name:"宗翰",
+		Name:"靜香",
 		Email:"feveraly@gmail.com",
 		Password:"5566",
 	},
@@ -28,7 +28,7 @@ memberManager.AddMember(
 memberManager.AddMember(
 	{
 		Id: "104820001",
-		Name:"阿瀚",
+		Name:"大雄",
 		Email:"aa3344@gmail.com",
 		Password:"5566",
 	},
@@ -39,7 +39,7 @@ memberManager.AddMember(
 memberManager.AddMember(
 	{
 		Id: "104820002",
-		Name:"阿滴",
+		Name:"小夫",
 		Email:"bb7788@gmail.com",
 		Password:"5566",
 	},
